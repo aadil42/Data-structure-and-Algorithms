@@ -9,7 +9,7 @@ class node {
 }
 
 
-class linkedList {
+ class linkedList {
     constructor() {
         this.head = null;
         this.size = 0;
