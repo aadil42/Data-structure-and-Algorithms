@@ -5,9 +5,7 @@
 // insert at position
 // delete at start
 // delete at end
-
 // delete at index
-
 
 class node{
 
@@ -139,6 +137,3 @@ myll.insertLast(700);
 myll.insertAt1Based(555, 1);
 console.log(myll.size);
 console.log(myll.printList());
-
-// myll.deleteFromFront();
-// console.log(myll.printReverrse());
