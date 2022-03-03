@@ -3,9 +3,9 @@
 // print list
 // print reverse list
 // insert at position
-
 // delete at start
 // delete at end
+
 // delete at index
 
 
@@ -72,6 +72,7 @@ class doublLinkList {
         const temp = currunt.next;
         currunt.next = new node(data, temp, currunt);
         temp.pre = currunt.next;
+        this.size++;
     }
     // delete from the front
     deleteFromFront() {
@@ -87,6 +88,21 @@ class doublLinkList {
             currunt = currunt.next;
         }
        currunt.next = null;
+    }
+    // delete at index
+    deleteIndex1Based(pos) {
+        if(pos > this.size || pos < 0) return 'enter valid index';
+        if(pos == 1) return this.deleteFromFront();
+        if(pos == this.size) return this.deleteFromBack();
+
+        let currunt = this.head;
+        let count = 1;
+        while(count < (pos - 1)) {
+            currunt = currunt.next;
+            count++;
+        } 
+        currunt.next = currunt.next.next;
+        currunt.next.pre = currunt;
     }
     // print the list
     printList() {
@@ -121,5 +137,8 @@ myll.insertLast(500);
 myll.insertLast(600);
 myll.insertLast(700);
 myll.insertAt1Based(555, 1);
+console.log(myll.size);
+console.log(myll.printList());
+
 // myll.deleteFromFront();
 // console.log(myll.printReverrse());
