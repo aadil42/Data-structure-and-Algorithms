@@ -41,6 +41,7 @@ class circularLinkedList {
         } 
         currunt.next = new Node(data);
         currunt.next.next = this.head;
+        this.size++;
     }
 
     printList() {
@@ -59,6 +60,23 @@ class circularLinkedList {
 
         return output;
     }
+    // reverse list
+    reverseCList() {
+        let currunt = this.head;
+        let pre = null;
+        while(currunt.next !== this.head) {
+            const temp = currunt.next;
+            currunt.next = pre;
+            pre = currunt;
+            currunt = temp;
+        }
+        // main code for circular 
+        let temp = currunt.next;
+        currunt.next = pre;
+        temp.next = currunt;
+        // changing the ref of head node
+        this.head  = currunt;
+    }
 }
 
 const cll = new circularLinkedList();
@@ -67,4 +85,5 @@ cll.insertAtLast(2);
 cll.insertAtLast(3);
 cll.insertAtLast(4);
 cll.insertAtLast(5);
+cll.reverseCList();
 console.log(cll.printList());
