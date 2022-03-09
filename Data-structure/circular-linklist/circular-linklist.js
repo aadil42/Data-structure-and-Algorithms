@@ -1,12 +1,14 @@
-// insert at first
 // insert at last 
+// reverse list
+// print list
+
+// insert at first
+
 // insert at position
 //  delete at first
 // delete at last
 //delete at position
-// reverse list
 //update list
-// print list
 // count list size
 
 
@@ -44,6 +46,20 @@ class circularLinkedList {
         this.size++;
     }
 
+    // 2->3 2->1->3->4
+    insertAtFirst(data) {
+    //getting the last node 
+    let currunt = this.head;
+    while(currunt && currunt.next !== this.head) {
+        currunt = currunt.next;
+    }
+    this.head = new Node(data, this.head);
+    if(currunt) {
+        currunt.next = this.head;
+    } else {
+        this.head.next = this.head;
+    }
+    }
     printList() {
         let output = '';
         let currunt = this.head;
@@ -81,9 +97,13 @@ class circularLinkedList {
 
 const cll = new circularLinkedList();
 
-cll.insertAtLast(2);
-cll.insertAtLast(3);
-cll.insertAtLast(4);
-cll.insertAtLast(5);
-cll.reverseCList();
+cll.insertAtFirst(6);
+cll.insertAtFirst(3);
+cll.insertAtFirst(1);
+// cll.insertAtLast(2);
+// cll.insertAtLast(3);
+// cll.insertAtLast(4);
+// cll.insertAtLast(5);
+// cll.insertAtFirst(6);
+// cll.reverseCList();
 console.log(cll.printList());
