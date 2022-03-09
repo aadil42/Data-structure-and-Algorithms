@@ -1,10 +1,9 @@
 // insert at last 
 // reverse list
 // print list
-
 // insert at first
-
 // insert at position
+
 //  delete at first
 // delete at last
 //delete at position
@@ -29,6 +28,7 @@ class circularLinkedList {
     insertAtFirstNode(data) {
         this.head = new Node(data);
         this.head.next = this.head;
+        this.size++;
     }
     insertAtLast(data) {
 
@@ -46,7 +46,6 @@ class circularLinkedList {
         this.size++;
     }
 
-    // 2->3 2->1->3->4
     insertAtFirst(data) {
     //getting the last node 
     let currunt = this.head;
@@ -59,17 +58,44 @@ class circularLinkedList {
     } else {
         this.head.next = this.head;
     }
+    this.size++;
     }
+
+    insertAtPosition1Based(data, pos) {
+        if(pos > this.size || pos < 1) return 'enter valid position';
+        if(pos == 1) return this.insertAtFirst(data);
+        if(pos == this.size + 1) return this.insertAtLast(data);
+        let count = 1;
+        let currunt = this.head;
+        while(currunt.next !== this.head && count < (pos - 1)) {
+            currunt = currunt.next;
+            count++;
+        }
+        currunt.next = new Node(data, currunt.next);
+        this.size++;
+    }
+        // 2->3 2->1->3->4
+    deleteAtFirst() {
+       // get the tail node;
+       if(this.size == 1) return this.head = null;
+       let currunt = this.head;
+       while(currunt && currunt.next !== this.head) {
+           currunt = currunt.next;
+       }
+       this.head = this.head.next;
+       currunt.next = this.head;       
+       this.size--;
+    }
+
     printList() {
+        if(!this.head) return 'nothing in the list';
         let output = '';
         let currunt = this.head;
-
         // this is for the first node only.
         output += currunt.val + "->";
         currunt = currunt.next;
 
         while(currunt !== this.head) {
-            console.log(currunt.val);
             output += currunt.val + '->';
             currunt = currunt.next;
         }
@@ -100,6 +126,11 @@ const cll = new circularLinkedList();
 cll.insertAtFirst(6);
 cll.insertAtFirst(3);
 cll.insertAtFirst(1);
+cll.insertAtPosition1Based(4,3);
+cll.deleteAtFirst();
+cll.deleteAtFirst();
+cll.deleteAtFirst();
+cll.deleteAtFirst();
 // cll.insertAtLast(2);
 // cll.insertAtLast(3);
 // cll.insertAtLast(4);
