@@ -3,8 +3,8 @@
 // print list
 // insert at first
 // insert at position
-
 //  delete at first
+
 // delete at last
 //delete at position
 //update list
@@ -74,7 +74,7 @@ class circularLinkedList {
         currunt.next = new Node(data, currunt.next);
         this.size++;
     }
-        // 2->3 2->1->3->4
+        
     deleteAtFirst() {
        // get the tail node;
        if(this.size == 1) return this.head = null;
@@ -86,7 +86,18 @@ class circularLinkedList {
        currunt.next = this.head;       
        this.size--;
     }
-
+    // 2->3 2->1->3->4
+    deleteAtLast() {
+       if(this.size == 1) return this.head = null;
+       let currunt = this.head;
+       let count = 1;
+       while(count < this.size - 1) {
+           currunt = currunt.next;
+           count++;
+       }
+       currunt.next = this.head;
+       this.size--;
+    }
     printList() {
         if(!this.head) return 'nothing in the list';
         let output = '';
@@ -126,11 +137,14 @@ const cll = new circularLinkedList();
 cll.insertAtFirst(6);
 cll.insertAtFirst(3);
 cll.insertAtFirst(1);
-cll.insertAtPosition1Based(4,3);
-cll.deleteAtFirst();
-cll.deleteAtFirst();
-cll.deleteAtFirst();
-cll.deleteAtFirst();
+cll.insertAtFirst(4);
+// cll.insertAtPosition1Based(4,3);
+console.log(cll.printList());
+
+cll.deleteAtLast();
+cll.deleteAtLast();
+cll.deleteAtLast();
+// cll.deleteAtLast();
 // cll.insertAtLast(2);
 // cll.insertAtLast(3);
 // cll.insertAtLast(4);
