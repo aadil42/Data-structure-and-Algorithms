@@ -5,7 +5,6 @@
 // insert at position
 //  delete at first
 // delete at last
-
 //delete at position
 
 //update list
@@ -25,7 +24,9 @@ class circularLinkedList {
         this.size = 0;
     }
 
-
+    mysize() {
+        return this.size;
+    }
     insertAtFirstNode(data) {
         this.head = new Node(data);
         this.head.next = this.head;
@@ -157,7 +158,7 @@ cll.insertAtFirst(29);
 cll.insertAtFirst(9);
 cll.insertAtFirst(3);
 console.log(cll.printList());
-cll.deleteAtPosition(1);
+// cll.deleteAtPosition(1);
 // cll.insertAtLast(2);
 // cll.insertAtLast(3);
 // cll.insertAtLast(4);
