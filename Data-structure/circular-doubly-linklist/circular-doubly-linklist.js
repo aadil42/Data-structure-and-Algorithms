@@ -1,6 +1,8 @@
 // insert at first 
-// insert at last
 // print list
+
+
+// insert at last
 // reverse list
 // find size
 
@@ -10,10 +12,6 @@ class Node {
         this.val = val;
         this.next = next;
         this.pre = pre;
-
-        // this.val ? val : null;
-        // this.next ? next : null;
-        // this.pre ? pre : null;    
     }
 }
 
@@ -24,8 +22,6 @@ class circularDoublyLinkList {
         this.size = 0;
     }
 
-    // null<-1->null
-    // insertAtFirstNode
     incrementSize() {
         this.size++;
     }
@@ -40,9 +36,7 @@ class circularDoublyLinkList {
     isnertAtFirst(data) {
        if(this.size == 0) return this.insertInitialNode(data);
     
-
        let currunt = this.head;
-
         // get the tail node;
        while(currunt && currunt.next !== this.head) {
            currunt = currunt.next;
@@ -51,6 +45,16 @@ class circularDoublyLinkList {
        currunt.next = this.head;
        console.log(this.head);
        this.incrementSize();    
+    }
+
+    insertAtLast(data) {
+        // get the last node 1->2->3->4
+        let currunt = this.head;
+        while(currunt && currunt.next !== this.head) {
+            currunt = currunt.next;
+        }
+
+        currunt.next = new Node(data, this.head, currunt);
     }
 
     printList() {
@@ -71,12 +75,9 @@ class circularDoublyLinkList {
 const dcll = new circularDoublyLinkList();
 
 dcll.isnertAtFirst(2);
-// dcll.isnertAtFirst(3);
-// dcll.isnertAtFirst(3);
-// dcll.isnertAtFirst(3);
-// dcll.isnertAtFirst(3);
-// dcll.isnertAtFirst(3);
-// dcll.isnertAtFirst(3);
+dcll.isnertAtFirst(3);
+dcll.isnertAtFirst(3);
+dcll.insertAtLast(4);
 console.log(dcll.printList());
 
 // dcll.isnertAtFirst(1);
