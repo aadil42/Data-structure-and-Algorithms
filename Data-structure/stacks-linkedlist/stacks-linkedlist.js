@@ -1,7 +1,8 @@
 // push
 // pop
-// count
 // display
+// count
+
 // peek
 
 class Node {
@@ -17,13 +18,26 @@ class LinkedListStack {
         this.size = 0;
     }
 
+    stackSize() {
+        return this.size;
+    }
+
+    Stackpeek() {
+        if(this.head) {
+            return this.head.val;
+        } else {
+            return 'stack is empty';
+        }
+    }
     Stackpush(data) {
         this.head = new Node(data, this.head);
+        this.size++;
     }
 
     StackPop() {
         if(this.head) {
             this.head = this.head.next;
+            this.size--;
         } else {
             return 'stack is empty';
         }
@@ -49,4 +63,4 @@ myStack.Stackpush(3);
 myStack.Stackpush(4);
 myStack.Stackpush(5);
 myStack.StackPop();
-console.log(myStack.displyaStack());
+console.log(myStack.stackSize());
