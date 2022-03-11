@@ -1,7 +1,6 @@
 // insert at first 
 // print list
 // insert at last
-
 // reverse list
 // find size
 
@@ -24,7 +23,9 @@ class circularDoublyLinkList {
     incrementSize() {
         this.size++;
     }
-
+    getSize() {
+        return this.size;
+    }
     insertInitialNode(data) {
         this.head = new Node(data, null, null);
         this.head.next = this.head;
@@ -86,6 +87,7 @@ class circularDoublyLinkList {
         }
         return output;
     }
+    // it's to check pre nodes. not neccesary(I know I misspelled the word)
     printFormEnd() {
         let currunt = this.tail;
         let output = '';
