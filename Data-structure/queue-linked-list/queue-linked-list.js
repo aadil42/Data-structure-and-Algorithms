@@ -20,8 +20,6 @@ class Queue {
         this.count = 0;
         this.back = null;
     }
-// null
-
 
     enqueue(data) {
         
@@ -62,11 +60,6 @@ class Queue {
         } else {
             return false;
         }
-        // if(!this.front) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
     }
 
     count1() {
