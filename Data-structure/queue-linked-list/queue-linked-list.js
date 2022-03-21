@@ -30,7 +30,7 @@ class Queue {
             this.back = new Node(data);
             this.front = this.back;
         }
-        // console.log(this.front);
+        this.size++;
     }
 
     dequeue() {
@@ -40,6 +40,7 @@ class Queue {
         } else {
             this.front = this.front.next;
         }
+        this.size--;
     }
 
     isFull() {
@@ -86,14 +87,14 @@ class Queue {
 
 
 const myQueue = new Queue();
-console.log(myQueue.isEmpty());
 myQueue.enqueue(1);
-myQueue.dequeue();
+// myQueue.dequeue();
 myQueue.enqueue(2);
 myQueue.enqueue(3);
 myQueue.enqueue(4);
 myQueue.enqueue(5);
 myQueue.enqueue(6);
+console.log(myQueue.peek());
 
 // myQueue.dequeue();
 
