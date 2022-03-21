@@ -14,15 +14,19 @@ class Node {
 }
 
 class Queue {
-    constructor() {
+    constructor(size) {
         this.front = null;
-        this.size = 0;
+        this.size = size;
+        this.count = 0;
         this.back = null;
     }
 // null
 
 
     enqueue(data) {
+        
+        if(this.isFull()) return;
+        
         if(this.back) {
             this.back.next = new Node(data);
             this.back = this.back.next;
@@ -30,7 +34,7 @@ class Queue {
             this.back = new Node(data);
             this.front = this.back;
         }
-        this.size++;
+        this.count++;
     }
 
     dequeue() {
@@ -40,27 +44,33 @@ class Queue {
         } else {
             this.front = this.front.next;
         }
-        this.size--;
+        this.count--;
     }
 
     isFull() {
-        if(this.front) {
-            return true;
+        if(this.count < this.size) {
+            return false;  
         } else {
-            return false;
+            return true;
         }
     }
 
     isEmpty() {
-        if(!this.front) {
+
+        if(this.count <= 0) {
             return true;
         } else {
             return false;
         }
+        // if(!this.front) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     }
 
-    count() {
-        return this.size;
+    count1() {
+        return this.count;
     }
 
     peek() {
@@ -86,13 +96,19 @@ class Queue {
 // - peek() – return front elemenet in the queue(line).
 
 
-const myQueue = new Queue();
+const myQueue = new Queue(5);
 myQueue.enqueue(1);
-myQueue.dequeue();
+// myQueue.dequeue();
 myQueue.enqueue(2);
 myQueue.enqueue(3);
 myQueue.enqueue(4);
 myQueue.enqueue(5);
+myQueue.dequeue()
+myQueue.dequeue()
 myQueue.enqueue(6);
-console.log(myQueue.peek());
+myQueue.enqueue(6);
+myQueue.enqueue(6);
+myQueue.enqueue(6);
+console.log(myQueue.count1());
+console.log(myQueue.print());
 
