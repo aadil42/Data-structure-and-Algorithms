@@ -8,21 +8,21 @@
 
 
 class Queue {
-    constructor() {
+    constructor(size) {
         this.queue = [];
         this.front = 0;
-        this.size = 0;
+        this.size = size;
     }
 
     enqueue(data) {
-        this.queue.push(data);
-        this.size++;
-        return this.queue;
+        if(this.size > this.count()) {
+            this.queue.push(data);
+            return this.queue;    
+        }
     }
 
     dequeue() {
        this.front++;
-       this.size--;
     }
 
     isEmpty() {
@@ -32,9 +32,9 @@ class Queue {
             return false;
         }
     }
-
+    
     count() {
-        return this.size;
+        return this.queue.length - this.front;
     }
 
     peek()  {
@@ -51,13 +51,15 @@ class Queue {
 }
 
 
-const myQueue = new Queue();
+const myQueue = new Queue(5);
 myQueue.enqueue(1);
 myQueue.enqueue(2);
 myQueue.enqueue(3);
+// myQueue.dequeue();
 myQueue.enqueue(4);
 myQueue.enqueue(5);
-myQueue.dequeue();
-myQueue.dequeue();
+myQueue.enqueue(6);
+// myQueue.dequeue();
+// myQueue.dequeue();
 
 console.log(myQueue.count());
