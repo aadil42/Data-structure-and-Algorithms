@@ -40,7 +40,6 @@ class Queue {
         } else {
             this.front = this.front.next;
         }
-        
     }
 
     isFull() {
@@ -85,8 +84,9 @@ class Queue {
 // - count() – Get number of items in the queue.
 // - peek() – return front elemenet in the queue(line).
 
-const myQueue = new Queue();
 
+const myQueue = new Queue();
+console.log(myQueue.isEmpty());
 myQueue.enqueue(1);
 myQueue.dequeue();
 myQueue.enqueue(2);
@@ -94,7 +94,7 @@ myQueue.enqueue(3);
 myQueue.enqueue(4);
 myQueue.enqueue(5);
 myQueue.enqueue(6);
+
 // myQueue.dequeue();
 
-console.log(myQueue.print());
 // console.log(myQueue.peek());
