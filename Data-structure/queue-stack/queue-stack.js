@@ -27,12 +27,14 @@ class Queue {
     constructor() {
         this.stackA = new Stack();
         this.stackB = new Stack();
+        this.size = 0;
         // [2,3,4,5,6]
         // [1,2,3,4] []
     }
 
     enqueu(data) {
         this.stackA.push(data);
+        this.size++;
     }
 
     dequeue() {
@@ -40,6 +42,9 @@ class Queue {
             while(!this.stackA.isEmpty()) {
                 this.stackB.push(this.stackA.pop());
             }
+        }
+        if(this.size > 0) {
+            this.size--;
         }
         this.stackB.pop();
     }
@@ -67,20 +72,23 @@ class Queue {
             return true;
         }
     }
+
+    count() {
+        return this.size;
+    }
 }
 
 // 3,10,101,52,4
 const myQueue = new Queue();
-myQueue.enqueu(1);
-myQueue.dequeue();
-myQueue.dequeue();
+myQueue.enqueu(1); 3
 myQueue.enqueu(2);
 myQueue.enqueu(3);
+myQueue.dequeue();
 myQueue.enqueu(10);
 myQueue.enqueu(101);
-myQueue.dequeue();
 myQueue.enqueu(52);
+myQueue.dequeue();
 myQueue.enqueu(4);
 myQueue.dequeue();
-console.log(myQueue.peek());
+console.log(myQueue.count());
 
