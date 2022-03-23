@@ -13,6 +13,7 @@ class Queue {
         this.front = -1;
         this.rear = -1;
         this.size = size;
+        this.counter = 0;
     }
 
    enqueue(data) {
@@ -23,10 +24,12 @@ class Queue {
     this.rear++;
     this.front++;
     this.queue[this.rear % this.size] = data;
+    this.counter++;
    } else {
     this.rear++;
     this.rear = this.rear % this.size;
     this.queue[this.rear] = data;
+    this.counter++;
    }
    }
 
@@ -38,6 +41,7 @@ class Queue {
     this.front = this.front % this.size;
     this.queue[this.front] = null;
     this.front++;
+    this.counter--;
    }
 
    isEmpty() {
@@ -60,6 +64,10 @@ class Queue {
        return true;
    }
 
+   count() {
+    return this.counter;
+   }
+
    print() {
        return this.queue;
    }
@@ -77,5 +85,6 @@ myQueue.enqueue(5);
 myQueue.enqueue(6);
 myQueue.dequeue();
 myQueue.enqueue(7);
+myQueue.dequeue(7);
 
-console.log(myQueue.print());
+console.log(myQueue.count());
