@@ -42,6 +42,7 @@ class Queue {
     this.queue[this.front] = null;
     this.front++;
     this.counter--;
+    console.log(this.front);
    }
 
    isEmpty() {
@@ -63,7 +64,10 @@ class Queue {
        }
        return true;
    }
-
+   peek() {
+       return this.queue[this.front % this.size];
+    //   return this.front == this.size ? this.queue[this.front % this.size] : this.queue[this.front];
+   }
    count() {
     return this.counter;
    }
@@ -76,15 +80,14 @@ class Queue {
 
 const myQueue = new Queue(4);
 myQueue.enqueue(1);
-myQueue.dequeue();
 myQueue.enqueue(2);
-myQueue.dequeue();
 myQueue.enqueue(3);
+myQueue.dequeue();
+myQueue.dequeue();
 myQueue.enqueue(4);
 myQueue.enqueue(5);
 myQueue.enqueue(6);
-myQueue.dequeue();
-myQueue.enqueue(7);
-myQueue.dequeue(7);
-
-console.log(myQueue.count());
+// myQueue.dequeue();
+// myQueue.dequeue();
+console.log(myQueue.print());
+console.log(myQueue.peek());
