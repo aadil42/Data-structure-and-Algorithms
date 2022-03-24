@@ -38,18 +38,17 @@ class Circular_queue_linked_list {
         
         if(this.isFull()) {
             return;
-        } else if(this.empty()) {
+        }else {
             this.rear.val = data;
             this.rear = this.rear.next;
-        } else {
-            this.rear.val = data;
-            this.rear = this.rear.next;
+            this.counter++;
         }
     }
     dequeu() {
         if(this.front.val) {
             this.front.val = null;
-            this.front = this.front.next;    
+            this.front = this.front.next;   
+            this.counter--; 
         }
     }
     empty() {
@@ -73,6 +72,9 @@ class Circular_queue_linked_list {
             return 'queue is empty.'
         }
     }
+    count() {
+        return this.counter;
+    }
     print() {
         let output = '';
         let currunt = this.front;
@@ -88,14 +90,16 @@ const myCircularQueue = new Circular_queue_linked_list(4);
 myCircularQueue.enqueue(1);
 myCircularQueue.enqueue(2);
 myCircularQueue.enqueue(3);
+// myCircularQueue.dequeu();
+// myCircularQueue.dequeu();
+// myCircularQueue.dequeu();
+// myCircularQueue.dequeu();
+// myCircularQueue.dequeu();
+// myCircularQueue.enqueue(4);
+// myCircularQueue.dequeu();
+// myCircularQueue.enqueue(5);
+// myCircularQueue.dequeu();
+// myCircularQueue.enqueue(10);
 myCircularQueue.dequeu();
-myCircularQueue.dequeu();
-myCircularQueue.dequeu();
-myCircularQueue.dequeu();
-myCircularQueue.dequeu();
-myCircularQueue.enqueue(4);
-myCircularQueue.dequeu();
-myCircularQueue.enqueue(5);
-myCircularQueue.dequeu();
-myCircularQueue.enqueue(10);
-console.log(myCircularQueue.peek());
+myCircularQueue.enqueue(2);
+console.log(myCircularQueue.count());
