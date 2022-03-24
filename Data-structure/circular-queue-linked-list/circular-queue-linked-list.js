@@ -110,7 +110,6 @@ class Circular_queue_linked_list {
             this.front = this.front.next;    
         }
     }
-
     empty() {
         if(this.front.val == null && this.rear.val == null) {
             return true;
@@ -118,7 +117,6 @@ class Circular_queue_linked_list {
             return false;
         }
     }
-    // 1->2->3
     isFull() {
         if(this.rear.val == null) {
             return false;
@@ -126,7 +124,13 @@ class Circular_queue_linked_list {
             return true;
         }
     }
-
+    peek() {
+        if(this.front.val) {
+            return this.front.val;
+        } else {
+            return 'queue is empty.'
+        }
+    }
     print() {
         let output = '';
         let currunt = this.front;
@@ -135,7 +139,6 @@ class Circular_queue_linked_list {
             currunt = currunt.next;
         }
         output += currunt.val + '->null';
-        // console.log(this.front);
         return output;
     }
 }
@@ -151,5 +154,6 @@ myCircularQueue.dequeu();
 myCircularQueue.enqueue(4);
 myCircularQueue.dequeu();
 myCircularQueue.enqueue(5);
-
-console.log(myCircularQueue.print());
+myCircularQueue.dequeu();
+myCircularQueue.enqueue(10);
+console.log(myCircularQueue.peek());
