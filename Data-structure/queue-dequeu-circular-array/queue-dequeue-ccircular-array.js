@@ -107,6 +107,25 @@ class Circular_dequeuing {
             this.count--;
         }
     }
+    // 1 4 3 2 
+    removeFirst() {
+        if(this.isEmpty()) {
+            return 'queue is empty';
+        } else if(this.front == this.rear) {
+            this.queue[this.front] = null;
+            this.front = -1;
+            this.rear = -1;
+            this.count--;
+        } else if( this.front == this.size -1) {
+            this.queue[this.front] = null;
+            this.front = (this.front + 1) % this.size;
+            this.count--;
+        } else {
+            this.queue[this.front] = null;
+            this.front++;
+            this.count--;
+        }
+    }
     print() {
         return this.queue;
     }
@@ -118,8 +137,11 @@ myqueue.addFirst(1);
 myqueue.addFirst(2);
 myqueue.addFirst(3);
 myqueue.addFirst(4);
-myqueue.removeLast();
+// myqueue.removeLast();
+myqueue.removeFirst();
+myqueue.removeFirst();
 myqueue.addLast(5);
-myqueue.removeLast();
+// myqueue.addLast(5);
+// myqueue.removeLast();
 
 console.log(myqueue.print());
