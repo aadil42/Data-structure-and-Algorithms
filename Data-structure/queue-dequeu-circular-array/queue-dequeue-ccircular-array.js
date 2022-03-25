@@ -1,9 +1,9 @@
-// is empety
-// is full
-// get first elemetn
-// get last 
-// add first 
-// add last 
+// is empety done
+// is full done
+// get first elemetn done
+// get last  done
+// add first  
+// add last  done
 // remove first 
 // remove last 
 // print queue
@@ -65,6 +65,26 @@ class Circular_dequeuing {
             this.count++;
         }
     }
+    // 1 0 0 0
+    addFirst(data) {
+        if(this.isFull()) {
+            return 'queue is full';
+        } else if(this.isEmpty()) {
+            this.rear = 0;
+            this.front = 0;
+            this.queue[this.front] = data;
+            this.count++;
+        } else if(this.front == 0){
+            this.front = this.size - 1;
+            this.queue[this.front] = data;
+            this.count++;
+        } else {
+            this.front = this.front - 1;
+            this.queue[this.front] = data;
+            this.count++;
+        }
+    }
+
 
     print() {
         return this.queue;
@@ -73,9 +93,11 @@ class Circular_dequeuing {
 
 
 const myqueue = new Circular_dequeuing(4);
-myqueue.addLast(1);
-myqueue.addLast(2);
-myqueue.addLast(3);
-myqueue.addLast(4);
+myqueue.addFirst(1);
+myqueue.addFirst(2);
+myqueue.addFirst(3);
+myqueue.addFirst(4);
+myqueue.addFirst(4);
+myqueue.addFirst(4);
 
-console.log(myqueue.getLastElemetn());
+console.log(myqueue.print());
