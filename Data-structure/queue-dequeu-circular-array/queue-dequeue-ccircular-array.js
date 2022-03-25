@@ -83,21 +83,43 @@ class Circular_dequeuing {
             this.queue[this.front] = data;
             this.count++;
         }
+    }  
+    // r f    
+    // 1 4 3 2
+    
+    // f     r
+    // 1 2 3 4
+    removeLast() {
+        if(this.isEmpty()) {
+            return 'queue is empty';
+        } else if(this.rear == 0) {
+            this.queue[this.rear] = null;
+            this.rear = this.size - 1;
+            this.count--;
+        } else if(this.rear == this.front) {
+            this.queue[this.rear] = null; 
+            this.rear = -1;
+            this.front = -1;
+            this.count--;
+        } else {
+            this.queue[this.rear] = null;
+            this.rear--;
+            this.count--;
+        }
     }
-
-
     print() {
         return this.queue;
     }
 }
 
-
+/// 5 4 3 2 
 const myqueue = new Circular_dequeuing(4);
-myqueue.addFirst(1);
+myqueue.addFirst(1); 
 myqueue.addFirst(2);
 myqueue.addFirst(3);
 myqueue.addFirst(4);
-myqueue.addFirst(4);
-myqueue.addFirst(4);
+myqueue.removeLast();
+myqueue.addLast(5);
+myqueue.removeLast();
 
 console.log(myqueue.print());
