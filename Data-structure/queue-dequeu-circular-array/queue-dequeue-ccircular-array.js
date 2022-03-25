@@ -2,11 +2,11 @@
 // is full done
 // get first elemetn done
 // get last  done
-// add first  
+// add first  done
 // add last  done
-// remove first 
-// remove last 
-// print queue
+// remove first done
+// remove last  done
+// print queue done
 
 
 // 1 2 3 4 
