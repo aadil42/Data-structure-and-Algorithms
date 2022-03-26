@@ -1,12 +1,12 @@
-// push 
+// push  done
 // pop
-// getParent
+// getParent done
 // getLeftChild
 // getRightChild
-// swap
+// swap done
 // compare
 // peek
-// print
+// print done
 
 class PriorityQueue {
     constructor() {
@@ -23,6 +23,31 @@ class PriorityQueue {
             currunt_index = parentIn;
         }
         this.size++;
+    }
+
+    pop() {
+        this.swap(0, this.queue.length -1);
+        this.queue.pop();
+        let currunt_index = 0;
+        console.log(currunt_index,this.getLeftChild(currunt_index), this.getRightChild(currunt_index));
+
+        while(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] || this.queue[currunt_index] > this.queue[this.getRightChild(currunt_index)]) {
+            if(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] && this.queue[this.getLeftChild(currunt_index)] >= this.queue[this.getRightChild(currunt_index)]) {
+                // swap the right child with parent
+                this.swap(currunt_index, this.getRightChild(currunt_index));
+                currunt_index = this.getRightChild(currunt_index);
+            } else if(this.queue[currunt_index] > this.queue[this.getRightChild(currunt_index)] && this.queue[this.getRightChild(currunt_index)] >= this.queue[this.getLeftChild(currunt_index)]) {
+                // swap the left child with parent
+                this.swap(currunt_index, this.getLeftChild(currunt_index));
+                currunt_index = this.getLeftChild(currunt_index);
+            } 
+        }
+    }
+    getLeftChild(index) {
+        return (index * 2) + 1;
+    }
+    getRightChild(index) {
+        return (index * 2) + 2;
     }
     swap(parentIn, currunt_index) {
         const temp = this.queue[currunt_index];
@@ -46,5 +71,8 @@ myPriority.push(3);
 myPriority.push(4);
 myPriority.push(2);
 myPriority.push(2);
-
+myPriority.pop();
+myPriority.pop();
+myPriority.pop();
+myPriority.pop();
 console.log(myPriority.print());
