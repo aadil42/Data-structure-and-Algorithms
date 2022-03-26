@@ -1,11 +1,10 @@
 // push  done
-// pop
+// pop done
 // getParent done
-// getLeftChild
-// getRightChild
+// getLeftChild done
+// getRightChild done
 // swap done
-// compare
-// peek
+// peek  done
 // print done
 
 class PriorityQueue {
@@ -29,8 +28,6 @@ class PriorityQueue {
         this.swap(0, this.queue.length -1);
         this.queue.pop();
         let currunt_index = 0;
-        console.log(currunt_index,this.getLeftChild(currunt_index), this.getRightChild(currunt_index));
-
         while(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] || this.queue[currunt_index] > this.queue[this.getRightChild(currunt_index)]) {
             if(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] && this.queue[this.getLeftChild(currunt_index)] >= this.queue[this.getRightChild(currunt_index)]) {
                 // swap the right child with parent
@@ -57,7 +54,9 @@ class PriorityQueue {
     getParent(index) {
         return Math.ceil((index - 2)/2);
     }
-
+    peek() {
+        return this.queue[0];
+    }
     print() {
         return this.queue;
     }
@@ -75,4 +74,4 @@ myPriority.pop();
 myPriority.pop();
 myPriority.pop();
 myPriority.pop();
-console.log(myPriority.print());
+console.log(myPriority.peek());
