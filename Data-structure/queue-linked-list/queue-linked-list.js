@@ -44,7 +44,22 @@ class Queue {
         }
         this.count--;
     }
-
+    reverseQueue() {
+        const stack = [];
+        while(this.front) {
+            stack.push(this.front.val);
+            this.front = this.front.next;
+        }
+        // setting everyting to 0 and null;
+        this.front = null;
+        this.back = null;
+        this.count = 0;
+        // pushing on to the queue in reverse
+        while(stack.length) {
+           
+            this.enqueue(stack.pop());
+        }
+    }
     isFull() {
         if(this.count < this.size) {
             return false;  
@@ -96,12 +111,13 @@ myQueue.enqueue(2);
 myQueue.enqueue(3);
 myQueue.enqueue(4);
 myQueue.enqueue(5);
-myQueue.dequeue()
-myQueue.dequeue()
+// myQueue.dequeue()
+// myQueue.dequeue()
 myQueue.enqueue(6);
 myQueue.enqueue(6);
 myQueue.enqueue(6);
 myQueue.enqueue(6);
-console.log(myQueue.count1());
-console.log(myQueue.print());
+myQueue.reverseQueue();
+// console.log(myQueue.count1());
+console.log(myQueue.peek());
 
