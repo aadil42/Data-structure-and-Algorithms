@@ -26,6 +26,106 @@
 // 26. ### Construct BST from Post-Order
 // 27. ### Check if the Binary Tree is Balanced
 
+// queue class
+
+class QNode {
+    constructor(val, next) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+class Queue {
+    constructor(size) {
+        this.front = null;
+        this.size = size;
+        this.count = 0;
+        this.back = null;
+    }
+
+    enqueue(data) {
+        
+        if(this.isFull()) return;
+        
+        if(this.back) {
+            this.back.next = new QNode(data);
+            this.back = this.back.next;
+        } else {
+            this.back = new QNode(data);
+            this.front = this.back;
+        }
+        this.count++;
+    }
+
+    dequeue() {
+        if(this.front && !this.front.next) {
+            const dequeueNode = this.front;
+            this.front = this.front.next;
+            this.back = this.front;
+            this.count--;
+            return dequeueNode;
+        } else {
+            const dequeueNode = this.front;
+            this.front = this.front.next;
+            this.count--;
+            return dequeueNode;
+        }
+    }
+    reverseQueue() {
+        const stack = [];
+        while(this.front) {
+            stack.push(this.front.val);
+            this.front = this.front.next;
+        }
+        // setting everyting to 0 and null;
+        this.front = null;
+        this.back = null;
+        this.count = 0;
+        // pushing on to the queue in reverse
+        while(stack.length) {
+           
+            this.enqueue(stack.pop());
+        }
+    }
+    isFull() {
+        if(this.count < this.size) {
+            return false;  
+        } else {
+            return true;
+        }
+    }
+
+    isEmpty() {
+
+        if(this.count <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    count1() {
+        return this.count;
+    }
+
+    peek() {
+        return this.front.val;
+    }
+
+    print() {
+        let currunt = this.front;
+        let linkedStr = '';
+        while(currunt) {
+            linkedStr += currunt.val + "->" ; 
+            currunt = currunt.next;
+        }
+        return linkedStr + 'null';
+    }
+}
+
+
+
+
 
 class Node {
     constructor(val, right = null, left = null) {
@@ -107,22 +207,57 @@ class BST {
             }
         }
     }
-    
+
+    // levelOrderInsertion it will make binary tree and not binary search tree.
+    levelOrderInsert(data) {
+        const queue = new Queue(Number. MAX_VALUE);
+        if(!this.root) {
+            this.root = new Node(data);
+            return;
+        } else {
+            const queue = new Queue(Number. MAX_VALUE);
+
+            queue.enqueue(this.root);
+            while(true) {
+                const currunt = queue.dequeue().val;
+                if(!currunt.left) {
+                    currunt.left = new Node(data);
+                    console.log(currunt.left);
+                    return;
+                }
+                if(!currunt.right) {
+                    currunt.right = new Node(data);
+                    console.log(currunt.right);
+                    return;
+                }
+                queue.enqueue(currunt.left);
+                queue.enqueue(currunt.right);
+            }
+        }
+    }
+
     print() {
         console.log(this.root);
     }
 }
 
 const myBinary = new BST();
-myBinary.insertNodeIteretively(10);
-myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
-// myBinary.insertNodeIteretively(7);
-myBinary.insertRecursivly(myBinary.root, 7);
-myBinary.insertRecursivly(myBinary.root, 40);
-// console.log(myBinary.root);
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(14);
+// // myBinary.insertNodeIteretively(7);
+// myBinary.insertRecursivly(myBinary.root, 7);
+// myBinary.insertRecursivly(myBinary.root, 40);
 
 // myBinary.insertRecursivly(10);
 // myBinary.insertRecursivly(3);
 // myBinary.insertRecursivly(1);
+
+myBinary.levelOrderInsert(1);
+myBinary.levelOrderInsert(2);
+myBinary.levelOrderInsert(3);
+myBinary.levelOrderInsert(4);
+myBinary.levelOrderInsert(5);
+myBinary.levelOrderInsert(6);
+myBinary.levelOrderInsert(7);
 myBinary.print();
