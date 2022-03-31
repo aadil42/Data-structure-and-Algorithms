@@ -256,7 +256,26 @@ class BST {
         console.log(curruntSpace + root.val + '\n');
         this.print2D(root.left, space);
     }
+    // 
+    printLevelOrder(root) {
+        const queue = new Queue(Number.MAX_VALUE);
 
+        if(!root) return null;
+        let output = "";
+        queue.enqueue(root);
+        while(!queue.isEmpty()) {
+            const curruntNode = queue.dequeue().val;
+            output += curruntNode.val + '->';
+            if(curruntNode.left) {
+                queue.enqueue(curruntNode.left);
+            }
+            if(curruntNode.right) {
+                queue.enqueue(curruntNode.right);
+            }
+        }
+
+        return output;
+    }
     // its basically an inorder traversal
     heightOfTree(root, curruntHeight) {
 
@@ -292,15 +311,15 @@ class BST {
     }
 
     maxValueInTree(root) {
-
         if(!root) return;
-
         this.maxValue = Math.max(this.maxValue, root.val);
         this.maxValueInTree(root.left);
         this.maxValueInTree(root.right);
 
         return this.maxValue;
     }
+
+
     printNormal() {
         console.log(this.root);
     }
@@ -317,7 +336,6 @@ myBinary.insertNodeIteretively(40);
 myBinary.insertNodeIteretively(25);
 myBinary.insertNodeIteretively(55);
 myBinary.insertNodeIteretively(96);
-myBinary.insertNodeIteretively(555);
 myBinary.insertNodeIteretively(69);
 myBinary.insertNodeIteretively(70);
 myBinary.insertNodeIteretively(44);
@@ -346,4 +364,4 @@ myBinary.insertNodeIteretively(144);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.maxValueInTree(myBinary.root));
+console.log(myBinary.printLevelOrder(myBinary.root));
