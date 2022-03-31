@@ -142,6 +142,7 @@ class BST {
         this.maxHeight = Number.MIN_SAFE_INTEGER;
         this.totalSumOfNodes = 0;
         this.totalNumOfNode = 0;
+        this.maxValue = Number.MIN_SAFE_INTEGER;
     }
 
     insertNodeIteretively(data) {
@@ -289,6 +290,17 @@ class BST {
         
         return this.totalNumOfNode;
     }
+
+    maxValueInTree(root) {
+
+        if(!root) return;
+
+        this.maxValue = Math.max(this.maxValue, root.val);
+        this.maxValueInTree(root.left);
+        this.maxValueInTree(root.right);
+
+        return this.maxValue;
+    }
     printNormal() {
         console.log(this.root);
     }
@@ -305,6 +317,7 @@ myBinary.insertNodeIteretively(40);
 myBinary.insertNodeIteretively(25);
 myBinary.insertNodeIteretively(55);
 myBinary.insertNodeIteretively(96);
+myBinary.insertNodeIteretively(555);
 myBinary.insertNodeIteretively(69);
 myBinary.insertNodeIteretively(70);
 myBinary.insertNodeIteretively(44);
@@ -333,4 +346,4 @@ myBinary.insertNodeIteretively(144);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.totalNodes(myBinary.root));
+console.log(myBinary.maxValueInTree(myBinary.root));
