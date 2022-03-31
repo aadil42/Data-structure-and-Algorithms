@@ -140,6 +140,7 @@ class BST {
         this.root = null;
         this.globleSpaceForPrinting = 5;
         this.maxHeight = Number.MIN_SAFE_INTEGER;
+        this.totalSumOfNodes = 0;
     }
 
     insertNodeIteretively(data) {
@@ -253,7 +254,7 @@ class BST {
         console.log(curruntSpace + root.val + '\n');
         this.print2D(root.left, space);
     }
-    
+
     // its basically a inorder traversal
     heightOfTree(root, curruntHeight) {
 
@@ -265,6 +266,16 @@ class BST {
         this.heightOfTree(root.right, curruntHeight);
 
         return this.maxHeight - 1;
+    }
+
+    sumOfAllNodes(root) {
+        if(!root) return;
+
+        this.totalSumOfNodes += root.val;
+        this.sumOfAllNodes(root.left);
+        this.sumOfAllNodes(root.right);
+
+        return this.totalSumOfNodes;
     }
 
     printNormal() {
@@ -311,4 +322,4 @@ myBinary.insertNodeIteretively(144);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.heightOfTree(myBinary.root, 0));
+console.log(myBinary.sumOfAllNodes(myBinary.root));
