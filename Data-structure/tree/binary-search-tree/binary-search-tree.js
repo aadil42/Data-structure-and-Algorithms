@@ -138,6 +138,7 @@ class Node {
 class BST {
     constructor() {
         this.root = null;
+        this.globleSpaceForPrinting = 5;
     }
 
     insertNodeIteretively(data) {
@@ -222,12 +223,10 @@ class BST {
                 const currunt = queue.dequeue().val;
                 if(!currunt.left) {
                     currunt.left = new Node(data);
-                    console.log(currunt.left);
                     return;
                 }
                 if(!currunt.right) {
                     currunt.right = new Node(data);
-                    console.log(currunt.right);
                     return;
                 }
                 queue.enqueue(currunt.left);
@@ -236,28 +235,46 @@ class BST {
         }
     }
 
-    print() {
+    //  just focus on the space variable and how it's changing with each recursive call. nothing complicated besides that.
+    print2D(root, space) {
+       
+        if(!root) {
+            return;
+        }
+        space = this.globleSpaceForPrinting + space;
+        this.print2D(root.right, space);
+
+        let curruntSpace = '';
+        for(let i = this.globleSpaceForPrinting; i < space; i++) {
+            curruntSpace += " ";
+        }
+
+        console.log(curruntSpace + root.val + '\n');
+        this.print2D(root.left, space);
+    }
+
+
+    printNormal() {
         console.log(this.root);
     }
 }
 
 const myBinary = new BST();
-// myBinary.insertNodeIteretively(10);
-// myBinary.insertNodeIteretively(2);
-// myBinary.insertNodeIteretively(14);
-// // myBinary.insertNodeIteretively(7);
-// myBinary.insertRecursivly(myBinary.root, 7);
-// myBinary.insertRecursivly(myBinary.root, 40);
+myBinary.insertNodeIteretively(10);
+myBinary.insertNodeIteretively(2);
+myBinary.insertNodeIteretively(14);
+// myBinary.insertNodeIteretively(7);
+myBinary.insertRecursivly(myBinary.root, 7);
+myBinary.insertRecursivly(myBinary.root, 40);
 
-// myBinary.insertRecursivly(10);
-// myBinary.insertRecursivly(3);
-// myBinary.insertRecursivly(1);
+myBinary.insertRecursivly(myBinary.root, 3);
+myBinary.insertRecursivly(myBinary.root, 1);
 
-myBinary.levelOrderInsert(1);
-myBinary.levelOrderInsert(2);
-myBinary.levelOrderInsert(3);
-myBinary.levelOrderInsert(4);
-myBinary.levelOrderInsert(5);
-myBinary.levelOrderInsert(6);
-myBinary.levelOrderInsert(7);
-myBinary.print();
+// myBinary.levelOrderInsert(1);
+// myBinary.levelOrderInsert(2);
+// myBinary.levelOrderInsert(3);
+// myBinary.levelOrderInsert(4);
+// myBinary.levelOrderInsert(5);
+// myBinary.levelOrderInsert(6);
+// myBinary.levelOrderInsert(7);
+myBinary.print2D(myBinary.root, 0);
