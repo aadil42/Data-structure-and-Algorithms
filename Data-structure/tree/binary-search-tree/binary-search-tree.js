@@ -139,6 +139,7 @@ class BST {
     constructor() {
         this.root = null;
         this.globleSpaceForPrinting = 5;
+        this.maxHeight = Number.MIN_SAFE_INTEGER;
     }
 
     insertNodeIteretively(data) {
@@ -235,7 +236,7 @@ class BST {
         }
     }
 
-    //  just focus on the space variable and how it's changing with each recursive call. nothing complicated besides that.
+    //  just focus on the "space" variable and how it's changing with each recursive call. nothing complicated besides that.
     print2D(root, space) {
        
         if(!root) {
@@ -252,7 +253,19 @@ class BST {
         console.log(curruntSpace + root.val + '\n');
         this.print2D(root.left, space);
     }
+    
+    // its basically a inorder traversal
+    heightOfTree(root, curruntHeight) {
 
+        if(!root) return;
+
+        curruntHeight += 1;
+        this.maxHeight = Math.max(this.maxHeight, curruntHeight);
+        this.heightOfTree(root.left, curruntHeight);
+        this.heightOfTree(root.right, curruntHeight);
+
+        return this.maxHeight - 1;
+    }
 
     printNormal() {
         console.log(this.root);
@@ -262,13 +275,26 @@ class BST {
 const myBinary = new BST();
 myBinary.insertNodeIteretively(10);
 myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
+myBinary.insertNodeIteretively(24);
+myBinary.insertNodeIteretively(123);
+myBinary.insertNodeIteretively(9);
+myBinary.insertNodeIteretively(32);
+myBinary.insertNodeIteretively(40);
+myBinary.insertNodeIteretively(25);
+myBinary.insertNodeIteretively(55);
+myBinary.insertNodeIteretively(96);
+myBinary.insertNodeIteretively(69);
+myBinary.insertNodeIteretively(70);
+myBinary.insertNodeIteretively(44);
+myBinary.insertNodeIteretively(77);
+myBinary.insertNodeIteretively(49);
+myBinary.insertNodeIteretively(144);
 // myBinary.insertNodeIteretively(7);
-myBinary.insertRecursivly(myBinary.root, 7);
-myBinary.insertRecursivly(myBinary.root, 40);
+// myBinary.insertRecursivly(myBinary.root, 7);
+// myBinary.insertRecursivly(myBinary.root, 40);
 
-myBinary.insertRecursivly(myBinary.root, 3);
-myBinary.insertRecursivly(myBinary.root, 1);
+// myBinary.insertRecursivly(myBinary.root, 3);
+// myBinary.insertRecursivly(myBinary.root, 1);
 
 // myBinary.levelOrderInsert(1);
 // myBinary.levelOrderInsert(2);
@@ -277,4 +303,12 @@ myBinary.insertRecursivly(myBinary.root, 1);
 // myBinary.levelOrderInsert(5);
 // myBinary.levelOrderInsert(6);
 // myBinary.levelOrderInsert(7);
-myBinary.print2D(myBinary.root, 0);
+// myBinary.levelOrderInsert(8);
+// myBinary.levelOrderInsert(9);
+// myBinary.levelOrderInsert(10);
+// myBinary.levelOrderInsert(11);
+// myBinary.levelOrderInsert(12);
+// myBinary.levelOrderInsert(13);
+// myBinary.levelOrderInsert(14);
+// myBinary.print2D(myBinary.root, 0);
+console.log(myBinary.heightOfTree(myBinary.root, 0));
