@@ -273,8 +273,34 @@ class BST {
                 queue.enqueue(curruntNode.right);
             }
         }
-
         return output;
+    }
+    printLevelOrderRecursivly(root) {
+
+      // calculating height of the tree  
+      const height = this.heightOfTree(root, 0);
+      let output = '';
+
+    //   calling print1 for each level
+      for(let i = 0; i < height + 1; i++) {
+          print1(root, i);
+      }
+
+      function print1(root, level) {
+          if(level == 0) {
+              if(root) {
+                output += root.val + ' ';
+              }
+            return;
+          } else {
+              if(root) {
+                print1(root.left, level - 1);
+                print1(root.right, level - 1);  
+              }
+          }
+      }
+
+      return output;
     }
     // its basically an inorder traversal
     heightOfTree(root, curruntHeight) {
@@ -326,22 +352,32 @@ class BST {
 }
 
 const myBinary = new BST();
+
 myBinary.insertNodeIteretively(10);
 myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(24);
-myBinary.insertNodeIteretively(123);
-myBinary.insertNodeIteretively(9);
-myBinary.insertNodeIteretively(32);
+myBinary.insertNodeIteretively(14);
+myBinary.insertNodeIteretively(1);
+myBinary.insertNodeIteretively(7);
 myBinary.insertNodeIteretively(40);
-myBinary.insertNodeIteretively(25);
-myBinary.insertNodeIteretively(55);
-myBinary.insertNodeIteretively(96);
-myBinary.insertNodeIteretively(69);
-myBinary.insertNodeIteretively(70);
-myBinary.insertNodeIteretively(44);
-myBinary.insertNodeIteretively(77);
-myBinary.insertNodeIteretively(49);
-myBinary.insertNodeIteretively(144);
+myBinary.insertNodeIteretively(3);
+
+
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(24);
+// myBinary.insertNodeIteretively(123);
+// myBinary.insertNodeIteretively(9);
+// myBinary.insertNodeIteretively(32);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(25);
+// myBinary.insertNodeIteretively(55);
+// myBinary.insertNodeIteretively(96);
+// myBinary.insertNodeIteretively(69);
+// myBinary.insertNodeIteretively(70);
+// myBinary.insertNodeIteretively(44);
+// myBinary.insertNodeIteretively(77);
+// myBinary.insertNodeIteretively(49);
+// myBinary.insertNodeIteretively(144);
 // myBinary.insertNodeIteretively(7);
 // myBinary.insertRecursivly(myBinary.root, 7);
 // myBinary.insertRecursivly(myBinary.root, 40);
@@ -364,4 +400,4 @@ myBinary.insertNodeIteretively(144);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.printLevelOrder(myBinary.root));
+console.log(myBinary.printLevelOrderRecursivly(myBinary.root, 0));
