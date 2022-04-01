@@ -302,6 +302,27 @@ class BST {
 
       return output;
     }
+
+    printSpecificLevel(root, level) {
+          
+          let output = "";
+          print1(root, level - 1);
+
+          function print1(root, level) {
+              if(level == 0) {
+                  if(root) {
+                    output += root.val + ' ';
+                  }
+                return;
+              } else {
+                  if(root) {
+                    print1(root.left, level - 1);
+                    print1(root.right, level - 1);  
+                  }
+              }
+          }
+          return output; 
+    }
     // its basically an inorder traversal
     heightOfTree(root, curruntHeight) {
 
@@ -326,6 +347,7 @@ class BST {
         return this.totalSumOfNodes;
     }   
 
+    
     totalNodes(root) {
         if(!root) return;
 
@@ -400,4 +422,4 @@ myBinary.insertNodeIteretively(3);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.printLevelOrderRecursivly(myBinary.root, 0));
+console.log(myBinary.printSpecificLevel(myBinary.root, 2));
