@@ -144,6 +144,7 @@ class BST {
         this.totalNumOfNode = 0;
         this.maxValue = Number.MIN_SAFE_INTEGER;
         this.preOrderTraversalStr = '';
+        this.postOrderTraversalStr = '';
     }
 
     insertNodeIteretively(data) {
@@ -311,6 +312,14 @@ class BST {
 
         return this.preOrderTraversalStr;
     }
+    postOrderTraversal(root) {
+        if(!root) return;
+        this.postOrderTraversal(root.left);
+        this.postOrderTraversal(root.right);
+        this.postOrderTraversalStr += root.val + " ";
+
+        return this.postOrderTraversalStr;
+    }
     printSpecificLevel(root, level) {
           
           let output = "";
@@ -462,4 +471,4 @@ myBinary.insertNodeIteretively(3);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.preOrderTraversal(myBinary.root));
+console.log(myBinary.postOrderTraversal(myBinary.root));
