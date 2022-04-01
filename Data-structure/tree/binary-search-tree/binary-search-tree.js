@@ -323,6 +323,8 @@ class BST {
           }
           return output; 
     }
+
+
     // its basically an inorder traversal
     heightOfTree(root, curruntHeight) {
 
@@ -347,7 +349,37 @@ class BST {
         return this.totalSumOfNodes;
     }   
 
-    
+    // just modifed the printLevelorderRecusivly. 
+    sumOfNodesAtEachLevel(root) {
+      // calculating height of the tree  
+      const height = this.heightOfTree(root, 0);
+
+    //   calling print1 for each level
+      const outputArr = [];
+      for(let i = 0; i < height + 1; i++) {
+          outputArr.push(print1(root, i, 0));
+      }
+
+      
+      function print1(root, level, curruntSum) {
+          if(level == 0) {
+              if(root) {
+                curruntSum += root.val;
+              }
+            return curruntSum;
+          } else {
+              if(root) {
+                curruntSum =  print1(root.left, level - 1, curruntSum);
+                curruntSum =  print1(root.right, level - 1, curruntSum);  
+              }
+          }
+
+          return curruntSum;
+      }
+
+      return outputArr;
+    }
+
     totalNodes(root) {
         if(!root) return;
 
@@ -422,4 +454,4 @@ myBinary.insertNodeIteretively(3);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.printSpecificLevel(myBinary.root, 2));
+console.log(myBinary.sumOfNodesAtEachLevel(myBinary.root));
