@@ -145,6 +145,7 @@ class BST {
         this.maxValue = Number.MIN_SAFE_INTEGER;
         this.preOrderTraversalStr = '';
         this.postOrderTraversalStr = '';
+        this.inOrderTraversalStr = '';
     }
 
     insertNodeIteretively(data) {
@@ -320,6 +321,18 @@ class BST {
 
         return this.postOrderTraversalStr;
     }
+    inOrderTraversal(root) {
+        if(!root) return;
+        this.inOrderTraversal(root.left);
+        this.inOrderTraversalStr += root.val + " ";
+        this.inOrderTraversal(root.right);
+
+        return this.inOrderTraversalStr;
+    }
+
+    printRootToLeaf(root) {
+        // start from here.
+    }
     printSpecificLevel(root, level) {
           
           let output = "";
@@ -424,13 +437,18 @@ class BST {
 
 const myBinary = new BST();
 
-myBinary.insertNodeIteretively(10);
-myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
-myBinary.insertNodeIteretively(1);
-myBinary.insertNodeIteretively(7);
-myBinary.insertNodeIteretively(40);
-myBinary.insertNodeIteretively(3);
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(14);
+// myBinary.insertNodeIteretively(1);
+// myBinary.insertNodeIteretively(7);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(3);
+myBinary.levelOrderInsert(7);
+myBinary.levelOrderInsert(2);
+myBinary.levelOrderInsert(1);
+myBinary.levelOrderInsert(0);
+myBinary.levelOrderInsert(4);
 
 
 // myBinary.insertNodeIteretively(10);
@@ -471,4 +489,4 @@ myBinary.insertNodeIteretively(3);
 // myBinary.levelOrderInsert(13);
 // myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.postOrderTraversal(myBinary.root));
+console.log(myBinary.inOrderTraversal(myBinary.root));
