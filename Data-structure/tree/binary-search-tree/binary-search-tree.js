@@ -442,6 +442,26 @@ class BST {
         return `No ${target} doesn't exists in the tree`;
     }
 
+    searchRecursively(root, target) {
+
+
+        let temp = root;
+        return goRecursive(temp, target);
+
+        function goRecursive(temp, target) {
+            if(!temp) return `No ${target} doesn't exists`;
+            if(temp.val === target) return `Yes ${target} does exists`;
+
+            let result;
+            if(target > temp.val) {
+              result  =  goRecursive(temp.right, target);
+            } else {
+               result = goRecursive(temp.left, target);
+            }
+
+            return result;
+        }
+    }
     totalNodes(root) {
         if(!root) return;
 
@@ -477,4 +497,4 @@ myBinary.insertNodeIteretively(7);
 myBinary.insertNodeIteretively(40);
 myBinary.insertNodeIteretively(3);
 
-console.log(myBinary.searchIterativly(myBinary.root, 40));
+console.log(myBinary.searchRecursively(myBinary.root, 55));
