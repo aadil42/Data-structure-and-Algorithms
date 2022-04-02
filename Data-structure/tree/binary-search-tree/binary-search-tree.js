@@ -330,8 +330,24 @@ class BST {
         return this.inOrderTraversalStr;
     }
 
-    printRootToLeaf(root) {
+    printAllRootToLeaf(root) {
         // start from here.
+       
+        const allPath = [];
+        goRecursive(root, []);
+        function goRecursive(root, curruntArr) {
+            if(!root) return;
+            curruntArr.push(root.val);
+            goRecursive(root.left, curruntArr);
+            goRecursive(root.right, curruntArr);
+            const newArr = curruntArr.slice();
+            if(!root.left && !root.right) {
+                allPath.push(newArr);
+            }
+            curruntArr.pop();
+        }
+
+        return allPath;
     }
     printSpecificLevel(root, level) {
           
@@ -444,11 +460,13 @@ const myBinary = new BST();
 // myBinary.insertNodeIteretively(7);
 // myBinary.insertNodeIteretively(40);
 // myBinary.insertNodeIteretively(3);
-myBinary.levelOrderInsert(7);
-myBinary.levelOrderInsert(2);
-myBinary.levelOrderInsert(1);
-myBinary.levelOrderInsert(0);
-myBinary.levelOrderInsert(4);
+// myBinary.levelOrderInsert(10);
+// myBinary.levelOrderInsert(2);
+// myBinary.levelOrderInsert(14);
+// myBinary.levelOrderInsert(1);
+// myBinary.levelOrderInsert(7);
+// myBinary.levelOrderInsert(40);
+// myBinary.levelOrderInsert(3);
 
 
 // myBinary.insertNodeIteretively(10);
@@ -474,19 +492,19 @@ myBinary.levelOrderInsert(4);
 // myBinary.insertRecursivly(myBinary.root, 3);
 // myBinary.insertRecursivly(myBinary.root, 1);
 
-// myBinary.levelOrderInsert(1);
-// myBinary.levelOrderInsert(2);
-// myBinary.levelOrderInsert(3);
-// myBinary.levelOrderInsert(4);
-// myBinary.levelOrderInsert(5);
-// myBinary.levelOrderInsert(6);
-// myBinary.levelOrderInsert(7);
-// myBinary.levelOrderInsert(8);
-// myBinary.levelOrderInsert(9);
-// myBinary.levelOrderInsert(10);
-// myBinary.levelOrderInsert(11);
-// myBinary.levelOrderInsert(12);
-// myBinary.levelOrderInsert(13);
-// myBinary.levelOrderInsert(14);
+myBinary.levelOrderInsert(1);
+myBinary.levelOrderInsert(2);
+myBinary.levelOrderInsert(3);
+myBinary.levelOrderInsert(4);
+myBinary.levelOrderInsert(5);
+myBinary.levelOrderInsert(6);
+myBinary.levelOrderInsert(7);
+myBinary.levelOrderInsert(8);
+myBinary.levelOrderInsert(9);
+myBinary.levelOrderInsert(10);
+myBinary.levelOrderInsert(11);
+myBinary.levelOrderInsert(12);
+myBinary.levelOrderInsert(13);
+myBinary.levelOrderInsert(14);
 // myBinary.print2D(myBinary.root, 0);
-console.log(myBinary.inOrderTraversal(myBinary.root));
+console.log(myBinary.printAllRootToLeaf(myBinary.root));
