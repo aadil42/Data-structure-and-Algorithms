@@ -439,14 +439,14 @@ class BST {
 
         while(temp) {
             if(temp.val === target) {
-                return `Yes ${temp.val} exists in the tree`;
+                return temp;
             } else if(target > temp.val) {
                 temp = temp.right;
             } else {
                 temp = temp.left;
             }
         }
-        return `No ${target} doesn't exists in the tree`;
+        return false;
     }
 
     searchRecursively(root, target) {
@@ -456,8 +456,8 @@ class BST {
         return goRecursive(temp, target);
 
         function goRecursive(temp, target) {
-            if(!temp) return `No ${target} doesn't exists`;
-            if(temp.val === target) return `Yes ${target} does exists`;
+            if(!temp) return false;
+            if(temp.val === target) return temp;
 
             let result;
             if(target > temp.val) {
@@ -480,7 +480,7 @@ class BST {
         if(!root) return;
         let leftHeight = that.heightOfTree(root.left);
         let rightHeight = that.heightOfTree(root.right);
-                
+
         maxDiemeterLen = Math.max(leftHeight + rightHeight + 2, maxDiemeterLen);
         calculate(root.left);
         calculate(root.right);
@@ -488,6 +488,48 @@ class BST {
        }
     }
 
+    diemeterOptimized(root) {
+        // do it later
+    }
+
+    deleteNode(root, deleteNode) {
+        let found = this.searchIterativly(root, deleteNode);
+        if(found) {
+            this.swapDfsAndDelete(found);
+            return 'deleted';
+        } else {
+            return `${deleteNode} doesn't exists`;
+        }
+    }
+
+    swapDfsAndDelete(root) {
+
+        if(!root) return;
+        if(!root.left && !root.right) {
+            console.log(root.val);
+            root.val = 'deleted';
+            return true;
+        }        
+
+        this.swap(root, root.left);
+        if(this.swapDfsAndDelete(root.left)) {
+            return;
+        }  
+
+        this.swap(root, root.right);
+        if(this.swapDfsAndDelete(root.right)) {
+            return;
+        }
+    }
+
+    swap(a,b) {
+        if(b) {
+            console.log('this runs');
+            const temp = a.val;
+            a.val = b.val;
+            b.val = temp;    
+        } 
+    }
     totalNodes(root) {
         if(!root) return;
 
@@ -514,13 +556,13 @@ class BST {
 const myBinary = new BST();
 
 // create tree A
-// myBinary.insertNodeIteretively(10);
-// myBinary.insertNodeIteretively(2);
-// myBinary.insertNodeIteretively(14);
-// myBinary.insertNodeIteretively(1);
-// myBinary.insertNodeIteretively(7);
-// myBinary.insertNodeIteretively(40);
-// myBinary.insertNodeIteretively(3);
+myBinary.insertNodeIteretively(10);
+myBinary.insertNodeIteretively(2);
+myBinary.insertNodeIteretively(14);
+myBinary.insertNodeIteretively(1);
+myBinary.insertNodeIteretively(7);
+myBinary.insertNodeIteretively(40);
+myBinary.insertNodeIteretively(3);
 
 // create tree B
 // myBinary.insertNodeIteretively(10);
@@ -541,4 +583,5 @@ const myBinary = new BST();
 // myBinary.insertNodeIteretively(77);
 
 
-console.log(myBinary.diemeterBrute(myBinary.root));
+console.log(myBinary.deleteNode(myBinary.root, 2));
+console.log(myBinary.print2D(myBinary.root, 0));
