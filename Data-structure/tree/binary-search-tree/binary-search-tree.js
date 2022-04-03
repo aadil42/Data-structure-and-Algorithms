@@ -146,6 +146,7 @@ class BST {
         this.preOrderTraversalStr = '';
         this.postOrderTraversalStr = '';
         this.inOrderTraversalStr = '';
+        this.burteDiemeterMaxLenght = 0;
     }
 
     insertNodeIteretively(data) {
@@ -372,16 +373,22 @@ class BST {
 
 
     // its basically an inorder traversal
-    heightOfTree(root, curruntHeight) {
+    heightOfTree(root) {
 
-        if(!root) return;
+        let maxHeight = 0;
+        return calculate(root, 0);
 
-        curruntHeight += 1;
-        this.maxHeight = Math.max(this.maxHeight, curruntHeight);
-        this.heightOfTree(root.left, curruntHeight);
-        this.heightOfTree(root.right, curruntHeight);
+        function calculate(root, curruntHeight) {
+            if(!root) return 0;
 
-        return this.maxHeight - 1;
+            curruntHeight += 1;
+            maxHeight = Math.max(maxHeight, curruntHeight);
+            calculate(root.left, curruntHeight);
+            calculate(root.right, curruntHeight);
+    
+            return maxHeight - 1;
+        }
+
     }
 
     // it's basically an inorder traversal
@@ -462,6 +469,25 @@ class BST {
             return result;
         }
     }
+
+    diemeterBrute(root) {
+        let maxDiemeterLen = 0;
+        const that = this;
+
+        return calculate(root);
+
+        function calculate(root) {
+        if(!root) return;
+        let leftHeight = that.heightOfTree(root.left);
+        let rightHeight = that.heightOfTree(root.right);
+                
+        maxDiemeterLen = Math.max(leftHeight + rightHeight + 2, maxDiemeterLen);
+        calculate(root.left);
+        calculate(root.right);
+        return maxDiemeterLen; 
+       }
+    }
+
     totalNodes(root) {
         if(!root) return;
 
@@ -477,10 +503,8 @@ class BST {
         this.maxValue = Math.max(this.maxValue, root.val);
         this.maxValueInTree(root.left);
         this.maxValueInTree(root.right);
-
         return this.maxValue;
     }
-
 
     printNormal() {
         console.log(this.root);
@@ -489,12 +513,32 @@ class BST {
 
 const myBinary = new BST();
 
-myBinary.insertNodeIteretively(10);
-myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
-myBinary.insertNodeIteretively(1);
-myBinary.insertNodeIteretively(7);
-myBinary.insertNodeIteretively(40);
-myBinary.insertNodeIteretively(3);
+// create tree A
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(14);
+// myBinary.insertNodeIteretively(1);
+// myBinary.insertNodeIteretively(7);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(3);
 
-console.log(myBinary.searchRecursively(myBinary.root, 55));
+// create tree B
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(24);
+// myBinary.insertNodeIteretively(9);
+// myBinary.insertNodeIteretively(23);
+// myBinary.insertNodeIteretively(32);
+// myBinary.insertNodeIteretively(144);
+// myBinary.insertNodeIteretively(25);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(55);
+// myBinary.insertNodeIteretively(44);
+// myBinary.insertNodeIteretively(96);
+// myBinary.insertNodeIteretively(49);
+// myBinary.insertNodeIteretively(69);
+// myBinary.insertNodeIteretively(70);
+// myBinary.insertNodeIteretively(77);
+
+
+console.log(myBinary.diemeterBrute(myBinary.root));
