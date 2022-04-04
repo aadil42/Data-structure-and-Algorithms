@@ -506,11 +506,13 @@ class BST {
 
         if(!root) return;
         if(!root.left && !root.right) {
-            console.log(root.val);
-            root.val = 'deleted';
+            console.log(root, 'this is it');
+            // for some weird reason it's not working, but when you do root.val == 'delete' it is referenceing the  desired node. don't know why it's not working
+            root = null;
+            console.log(this.root);
+           
             return true;
         }        
-
         this.swap(root, root.left);
         if(this.swapDfsAndDelete(root.left)) {
             return;
