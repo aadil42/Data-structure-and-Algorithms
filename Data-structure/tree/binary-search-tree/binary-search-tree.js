@@ -143,9 +143,9 @@ class BST {
         this.totalSumOfNodes = 0;
         this.totalNumOfNode = 0;
         this.maxValue = Number.MIN_SAFE_INTEGER;
-        this.preOrderTraversalStr = '';
-        this.postOrderTraversalStr = '';
-        this.inOrderTraversalStr = '';
+        this.preOrderTraversalArr = [];
+        this.postOrderTraversalArr = [];
+        this.inOrderTraversalArr = [];
         this.burteDiemeterMaxLenght = 0;
     }
 
@@ -308,27 +308,27 @@ class BST {
     }
     preOrderTraversal(root) {
         if(!root) return;
-        this.preOrderTraversalStr += root.val + " ";
+        this.preOrderTraversalArr.push(root.val);
         this.preOrderTraversal(root.left);
         this.preOrderTraversal(root.right);
 
-        return this.preOrderTraversalStr;
+        return this.preOrderTraversalArr;
     }
     postOrderTraversal(root) {
         if(!root) return;
         this.postOrderTraversal(root.left);
         this.postOrderTraversal(root.right);
-        this.postOrderTraversalStr += root.val + " ";
+        this.postOrderTraversalArr.push(root.val);
 
-        return this.postOrderTraversalStr;
+        return this.postOrderTraversalArr;
     }
     inOrderTraversal(root) {
         if(!root) return;
         this.inOrderTraversal(root.left);
-        this.inOrderTraversalStr += root.val + " ";
+        this.inOrderTraversalArr.push(root.val);
         this.inOrderTraversal(root.right);
 
-        return this.inOrderTraversalStr;
+        return this.inOrderTraversalArr;
     }
 
     printAllRootToLeaf(root) {
@@ -541,7 +541,28 @@ class BST {
         
         return this.totalNumOfNode;
     }
+    // just need to remember all the variables passed in goRecursive function.
+    InPreTreeConstruction(inO, preO) {
 
+        return goRecursive(inO, 0, inO.length - 1, preO, 0, preO.length - 1);
+
+        function goRecursive(inO, isi, iei, preO, psi, pei) {
+            console.log(isi, iei, psi, pei);
+            if(isi > iei) return null;
+
+            const node = new Node(preO[psi]);
+            // console.log(node);
+            let curruntIndex = isi;
+            while(inO[curruntIndex] !== preO[psi]) {
+                curruntIndex++;
+            }
+
+            const totalElementUntillRoot = curruntIndex -  isi;
+            node.left = goRecursive(inO, isi, curruntIndex - 1, preO, psi + 1, totalElementUntillRoot + psi);
+            node.right = goRecursive(inO, curruntIndex + 1, iei, preO, psi + 1 + totalElementUntillRoot, pei);
+            return node;
+        }
+    }
     maxValueInTree(root) {
         if(!root) return;
         this.maxValue = Math.max(this.maxValue, root.val);
@@ -558,13 +579,13 @@ class BST {
 const myBinary = new BST();
 
 // create tree A
-myBinary.insertNodeIteretively(10);
-myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
-myBinary.insertNodeIteretively(1);
-myBinary.insertNodeIteretively(7);
-myBinary.insertNodeIteretively(40);
-myBinary.insertNodeIteretively(3);
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(14);
+// myBinary.insertNodeIteretively(1);
+// myBinary.insertNodeIteretively(7);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(3);
 
 // create tree B
 // myBinary.insertNodeIteretively(10);
@@ -584,6 +605,27 @@ myBinary.insertNodeIteretively(3);
 // myBinary.insertNodeIteretively(70);
 // myBinary.insertNodeIteretively(77);
 
+//tree C
+myBinary.levelOrderInsert(0);
+myBinary.levelOrderInsert(1);
+myBinary.levelOrderInsert(2);
+myBinary.levelOrderInsert(3);
+myBinary.levelOrderInsert(4);
+myBinary.levelOrderInsert(5);
+myBinary.levelOrderInsert(6);
+myBinary.levelOrderInsert(7);
+myBinary.levelOrderInsert(8);
+myBinary.levelOrderInsert(9);
+myBinary.levelOrderInsert(10);
+myBinary.levelOrderInsert(11);
 
-console.log(myBinary.deleteNode(myBinary.root, 2));
-console.log(myBinary.print2D(myBinary.root, 0));
+const inOrder = myBinary.inOrderTraversal(myBinary.root);
+// console.log(inOrder);
+const preOrder = myBinary.preOrderTraversal(myBinary.root);
+// console.log(preOrder);
+
+const newRoot = myBinary.InPreTreeConstruction(inOrder, preOrder);
+// console.log(newRoot);
+myBinary.print2D(newRoot, 0);
+// // console.log(myBinary.deleteNode(myBinary.root, 2));
+// console.log(myBinary.inOrderTraversal(newRoot));
