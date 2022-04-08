@@ -563,6 +563,32 @@ class BST {
             return node;
         }
     }
+    
+
+    InPostTreeConstruction(postO, InO) {
+        // start writing the code here.
+        // console.log(postO, InO);
+        return goRecursive(postO, 0, postO.length - 1, InO, 0, InO.length - 1);
+
+        function goRecursive(postO, psi, pei, InO, isi, iei) {
+            if(isi > iei) return null;
+
+            const node = new Node(postO[pei]);
+
+            let curruntIndex = isi;
+            while(InO[curruntIndex] !== postO[pei]) {
+                curruntIndex++;
+            }
+            const numberOfel = curruntIndex - isi;
+
+            // console.log(curruntIndex);
+            node.left = goRecursive(postO, psi, psi + numberOfel - 1, InO, isi, curruntIndex - 1);
+            node.right = goRecursive(postO, numberOfel + psi, pei - 1, InO, curruntIndex + 1, iei);
+
+            return node;
+        }
+    }
+
     maxValueInTree(root) {
         if(!root) return;
         this.maxValue = Math.max(this.maxValue, root.val);
@@ -623,9 +649,11 @@ const inOrder = myBinary.inOrderTraversal(myBinary.root);
 // console.log(inOrder);
 const preOrder = myBinary.preOrderTraversal(myBinary.root);
 // console.log(preOrder);
+const postOrder = myBinary.postOrderTraversal(myBinary.root);
+// console.log(postOrder);
 
-const newRoot = myBinary.InPreTreeConstruction(inOrder, preOrder);
-// console.log(newRoot);
+const newRoot = myBinary.InPostTreeConstruction(postOrder, inOrder);
+console.log(newRoot);
 myBinary.print2D(newRoot, 0);
 // // console.log(myBinary.deleteNode(myBinary.root, 2));
 // console.log(myBinary.inOrderTraversal(newRoot));
