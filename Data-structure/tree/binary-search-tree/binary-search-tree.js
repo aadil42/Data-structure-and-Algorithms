@@ -589,6 +589,24 @@ class BST {
         }
     }
 
+    // for some reason it gives me a diffrent tree, if anyone can help that would be great.
+    inOrderTreeConstruction(InO) {
+
+        return goRecursive(InO, 0, InO.length - 1);
+        
+        function goRecursive(InO, psi, pei) {
+            if(psi > pei) return null;
+
+            const midPoint = Math.ceil((psi + pei) / 2);
+            const node = new Node(InO[midPoint]);
+
+            node.left = goRecursive(InO, psi, midPoint - 1);
+            node.right = goRecursive(InO, midPoint + 1, pei);
+
+            return node;
+        }
+    }
+
     maxValueInTree(root) {
         if(!root) return;
         this.maxValue = Math.max(this.maxValue, root.val);
@@ -652,7 +670,7 @@ const preOrder = myBinary.preOrderTraversal(myBinary.root);
 const postOrder = myBinary.postOrderTraversal(myBinary.root);
 // console.log(postOrder);
 
-const newRoot = myBinary.InPostTreeConstruction(postOrder, inOrder);
+const newRoot = myBinary.inOrderTreeConstruction(inOrder);
 console.log(newRoot);
 myBinary.print2D(newRoot, 0);
 // // console.log(myBinary.deleteNode(myBinary.root, 2));
