@@ -590,7 +590,7 @@ class BST {
     }
 
     // for some reason it gives me a diffrent tree, if anyone can help that would be great.
-    inOrderTreeConstruction(InO) {
+    inOrderBSTConstruction(InO) {
 
         return goRecursive(InO, 0, InO.length - 1);
         
@@ -623,13 +623,13 @@ class BST {
 const myBinary = new BST();
 
 // create tree A
-// myBinary.insertNodeIteretively(10);
-// myBinary.insertNodeIteretively(2);
-// myBinary.insertNodeIteretively(14);
-// myBinary.insertNodeIteretively(1);
-// myBinary.insertNodeIteretively(7);
-// myBinary.insertNodeIteretively(40);
-// myBinary.insertNodeIteretively(3);
+myBinary.insertNodeIteretively(10);
+myBinary.insertNodeIteretively(2);
+myBinary.insertNodeIteretively(14);
+myBinary.insertNodeIteretively(1);
+myBinary.insertNodeIteretively(7);
+myBinary.insertNodeIteretively(40);
+myBinary.insertNodeIteretively(3);
 
 // create tree B
 // myBinary.insertNodeIteretively(10);
@@ -650,18 +650,18 @@ const myBinary = new BST();
 // myBinary.insertNodeIteretively(77);
 
 //tree C
-myBinary.levelOrderInsert(0);
-myBinary.levelOrderInsert(1);
-myBinary.levelOrderInsert(2);
-myBinary.levelOrderInsert(3);
-myBinary.levelOrderInsert(4);
-myBinary.levelOrderInsert(5);
-myBinary.levelOrderInsert(6);
-myBinary.levelOrderInsert(7);
-myBinary.levelOrderInsert(8);
-myBinary.levelOrderInsert(9);
-myBinary.levelOrderInsert(10);
-myBinary.levelOrderInsert(11);
+// myBinary.levelOrderInsert(0);
+// myBinary.levelOrderInsert(1);
+// myBinary.levelOrderInsert(2);
+// myBinary.levelOrderInsert(3);
+// myBinary.levelOrderInsert(4);
+// myBinary.levelOrderInsert(5);
+// myBinary.levelOrderInsert(6);
+// myBinary.levelOrderInsert(7);
+// myBinary.levelOrderInsert(8);
+// myBinary.levelOrderInsert(9);
+// myBinary.levelOrderInsert(10);
+// myBinary.levelOrderInsert(11);
 
 const inOrder = myBinary.inOrderTraversal(myBinary.root);
 // console.log(inOrder);
@@ -670,7 +670,7 @@ const preOrder = myBinary.preOrderTraversal(myBinary.root);
 const postOrder = myBinary.postOrderTraversal(myBinary.root);
 // console.log(postOrder);
 
-const newRoot = myBinary.inOrderTreeConstruction(inOrder);
+const newRoot = myBinary.inOrderBSTConstruction(inOrder);
 console.log(newRoot);
 myBinary.print2D(newRoot, 0);
 // // console.log(myBinary.deleteNode(myBinary.root, 2));
