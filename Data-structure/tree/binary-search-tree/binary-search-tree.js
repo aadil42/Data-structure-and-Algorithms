@@ -589,7 +589,7 @@ class BST {
         }
     }
 
-    // for some reason it gives me a diffrent tree, if anyone can help that would be great.
+    // constructing BST from inorder array. just notice inorder array is sorted.
     inOrderBSTConstruction(InO) {
 
         return goRecursive(InO, 0, InO.length - 1);
@@ -606,7 +606,25 @@ class BST {
             return node;
         }
     }
+    preOrderBSTConstruction(preO) {
+    let lr = Math.MIN_SAFE_INTEGER;
+    let rr = Math.MAX_SAFE_INTEGER;
+    let i = 0;
+    return goRecursive(preO, lr, rr);
 
+    function goRecursive(preO, lr, rr) {
+
+        // all the crux of this algorithem is in this blow condition
+        if(i >= preO.length || preO[i] > rr || preO[i] < lr) return null;
+
+        const node = new Node(preO[i]);
+        i++;
+        node.left = goRecursive(preO, lr, node.val);
+        node.right = goRecursive(preO, node.val, rr);
+        console.log(node);
+        return node;
+    }
+    }
     maxValueInTree(root) {
         if(!root) return;
         this.maxValue = Math.max(this.maxValue, root.val);
@@ -666,11 +684,11 @@ myBinary.insertNodeIteretively(3);
 const inOrder = myBinary.inOrderTraversal(myBinary.root);
 // console.log(inOrder);
 const preOrder = myBinary.preOrderTraversal(myBinary.root);
-// console.log(preOrder);
+console.log(preOrder);
 const postOrder = myBinary.postOrderTraversal(myBinary.root);
 // console.log(postOrder);
 
-const newRoot = myBinary.inOrderBSTConstruction(inOrder);
+const newRoot = myBinary.preOrderBSTConstruction(preOrder);
 console.log(newRoot);
 myBinary.print2D(newRoot, 0);
 // // console.log(myBinary.deleteNode(myBinary.root, 2));
