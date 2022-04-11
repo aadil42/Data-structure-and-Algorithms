@@ -606,6 +606,27 @@ class BST {
             return node;
         }
     }
+
+    postOrderBSTConstruction(PostO) {
+        let lr = Math.MIN_SAFE_INTEGER;
+        let rr = Math.MAX_SAFE_INTEGER;
+
+        PostO.reverse();
+        let i = 0;
+
+        return goRecursive(PostO, lr, rr)
+        function goRecursive(PostO, lr, rr) {
+
+        if(i >= PostO.length || PostO[i] > rr || PostO[i] < lr) return null;
+
+        const node = new Node(PostO[i]);
+        i++;
+        node.right = goRecursive(PostO, node.val, rr);
+        node.left = goRecursive(PostO, lr, node.val);
+        
+        return node;
+        }
+    }
     preOrderBSTConstruction(preO) {
     let lr = Math.MIN_SAFE_INTEGER;
     let rr = Math.MAX_SAFE_INTEGER;
@@ -684,11 +705,11 @@ myBinary.insertNodeIteretively(3);
 const inOrder = myBinary.inOrderTraversal(myBinary.root);
 // console.log(inOrder);
 const preOrder = myBinary.preOrderTraversal(myBinary.root);
-console.log(preOrder);
+// console.log(preOrder);
 const postOrder = myBinary.postOrderTraversal(myBinary.root);
 // console.log(postOrder);
 
-const newRoot = myBinary.preOrderBSTConstruction(preOrder);
+const newRoot = myBinary.postOrderBSTConstruction(postOrder);
 console.log(newRoot);
 myBinary.print2D(newRoot, 0);
 // // console.log(myBinary.deleteNode(myBinary.root, 2));
