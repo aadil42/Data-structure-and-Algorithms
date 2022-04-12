@@ -646,6 +646,26 @@ class BST {
         return node;
     }
     }
+
+    isBalanced(root) {
+        
+        let balanced = true;
+        goRecursive(root);
+        function goRecursive(root) {
+            if(!root) return -1;
+
+            const left = goRecursive(root.left);
+            const right = goRecursive(root.right);
+            
+            if(Math.abs(left - right) > 1) {
+                balanced = false;
+            }
+
+            return Math.max(left, right) + 1;
+        }
+
+        return balanced;
+    }
     maxValueInTree(root) {
         if(!root) return;
         this.maxValue = Math.max(this.maxValue, root.val);
@@ -669,6 +689,7 @@ myBinary.insertNodeIteretively(1);
 myBinary.insertNodeIteretively(7);
 myBinary.insertNodeIteretively(40);
 myBinary.insertNodeIteretively(3);
+myBinary.insertNodeIteretively(4);
 
 // create tree B
 // myBinary.insertNodeIteretively(10);
@@ -709,8 +730,9 @@ const preOrder = myBinary.preOrderTraversal(myBinary.root);
 const postOrder = myBinary.postOrderTraversal(myBinary.root);
 // console.log(postOrder);
 
-const newRoot = myBinary.postOrderBSTConstruction(postOrder);
-console.log(newRoot);
-myBinary.print2D(newRoot, 0);
-// // console.log(myBinary.deleteNode(myBinary.root, 2));
-// console.log(myBinary.inOrderTraversal(newRoot));
+// const newRoot = myBinary.postOrderBSTConstruction(postOrder);
+// console.log(newRoot);
+// myBinary.print2D(newRoot, 0);
+// console.log(myBinary.deleteNode(myBinary.root, 2));
+
+console.log(myBinary.isBalanced(myBinary.root));
