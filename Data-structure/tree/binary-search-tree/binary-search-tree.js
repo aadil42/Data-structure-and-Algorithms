@@ -682,14 +682,14 @@ class BST {
 const myBinary = new BST();
 
 // create tree A
-myBinary.insertNodeIteretively(10);
-myBinary.insertNodeIteretively(2);
-myBinary.insertNodeIteretively(14);
-myBinary.insertNodeIteretively(1);
-myBinary.insertNodeIteretively(7);
-myBinary.insertNodeIteretively(40);
-myBinary.insertNodeIteretively(3);
-myBinary.insertNodeIteretively(4);
+// myBinary.insertNodeIteretively(10);
+// myBinary.insertNodeIteretively(2);
+// myBinary.insertNodeIteretively(14);
+// myBinary.insertNodeIteretively(1);
+// myBinary.insertNodeIteretively(7);
+// myBinary.insertNodeIteretively(40);
+// myBinary.insertNodeIteretively(3);
+// myBinary.insertNodeIteretively(4);
 
 // create tree B
 // myBinary.insertNodeIteretively(10);
@@ -723,6 +723,11 @@ myBinary.insertNodeIteretively(4);
 // myBinary.levelOrderInsert(10);
 // myBinary.levelOrderInsert(11);
 
+myBinary.insertNodeIteretively(3);
+myBinary.insertNodeIteretively(1);
+myBinary.insertNodeIteretively(2);
+myBinary.insertNodeIteretively(4);
+
 const inOrder = myBinary.inOrderTraversal(myBinary.root);
 // console.log(inOrder);
 const preOrder = myBinary.preOrderTraversal(myBinary.root);
@@ -732,7 +737,7 @@ const postOrder = myBinary.postOrderTraversal(myBinary.root);
 
 // const newRoot = myBinary.postOrderBSTConstruction(postOrder);
 // console.log(newRoot);
-// myBinary.print2D(newRoot, 0);
+myBinary.print2D(myBinary.root, 0);
 // console.log(myBinary.deleteNode(myBinary.root, 2));
 
-console.log(myBinary.isBalanced(myBinary.root));
+console.log(myBinary.heightOfTree(myBinary.root.left));
