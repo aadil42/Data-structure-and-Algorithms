@@ -37,7 +37,6 @@ class avlTree {
 
     temp.right = root;
     root.left = temp1;
-    console.log(temp)
     return temp;
    }
 
@@ -97,7 +96,66 @@ class avlTree {
 
         return this.root;
     }
-    
+    leftM(root) {
+        if(root.right) {
+            return this.leftM(root.right);
+        } else {
+            return root.val;
+        }
+    }
+    deleteNode(root, val) {
+        const that = this;
+        this.root = goRecursive(root, val);
+
+        function goRecursive(root, val) {
+
+            if(root && val > root.val) {
+                // go right
+                root.right = goRecursive(root.right, val);
+            } else if(root && val < root.val) {
+                root.left = goRecursive(root.left, val);
+                // go left
+            } else if(root && val === root.val) {
+
+               if(root.left && root.right) {
+                   // node has left and right child
+                   const leftMax = that.leftM(root.left);
+                   root.val = leftMax;
+                   root.left = that.deleteNode(root.left, leftMax);
+               } else if(root.left !== null) {
+                   // node has only left child
+                   return root.left;
+               } else if(root.right !== null) {
+                   // node has only right child
+                   return root.right;
+               } else {
+                //    it's a leaf node delete it
+                root = null;
+               }
+
+            } else {
+                return false;
+            }
+
+            const bf = that.getBalanceFactor(root);
+           
+            if(bf == 2 && that.getBalanceFactor(root.left) > 0) {
+                return that.rightRotate(root);
+            } else if(bf == -2 && that.getBalanceFactor(root.right) < 0) {
+                return that.leftRotate(root);
+            } else if(bf == 2 && that.getBalanceFactor(root.left) < 0) {
+                root.left = that.leftRotate(root.left);
+                return that.rightRotate(root);
+            } else if(bf == -2 && that.getBalanceFactor(root.right) > 0) {
+                root.right = that.rightRotate(root.right);
+                return that.leftRotate(root);
+            }
+
+            return root;
+        }
+
+        return this.root;
+    }
     print2D(root, space) {
         if(!root) {
             return;
@@ -125,4 +183,15 @@ myAvl.insertNode(myAvl.root,82);
 myAvl.insertNode(myAvl.root,12);
 myAvl.insertNode(myAvl.root,42);
 myAvl.insertNode(myAvl.root,30);
+// myAvl.deleteNode(myAvl.root, 42);
+myAvl.deleteNode(myAvl.root, 50);
+// myAvl.deleteNode(myAvl.root, 42);
+// myAvl.deleteNode(myAvl.root, 60);
+// myAvl.deleteNode(myAvl.root, 82);
+// myAvl.deleteNode(myAvl.root, 65);
+// myAvl.deleteNode(myAvl.root, 42);
+// myAvl.deleteNode(myAvl.root, 42);
+// myAvl.deleteNode(myAvl.root, 42);
+// myAvl.deleteNode(myAvl.root, 42);
+// myAvl.deleteNode(myAvl.root, 40);
 myAvl.print2D(myAvl.root, 5);
