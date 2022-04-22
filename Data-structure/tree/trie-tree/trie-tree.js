@@ -24,6 +24,23 @@ class Trie{
         });
         curruntNode.isEnd = true;
     }
+
+    search(word) {
+        let curruntNode = this.root;
+
+        for(let i = 0; i < word.length; i++) {
+            if(curruntNode.next[word[i].charCodeAt(0) - 97]) {
+                curruntNode = curruntNode.next[word[i].charCodeAt(0) - 97];
+            } else {
+                return false;
+            }
+        }
+        if(curruntNode.isEnd) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 const myTrie = new Trie();
