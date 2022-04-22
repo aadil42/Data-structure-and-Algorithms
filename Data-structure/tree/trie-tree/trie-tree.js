@@ -41,8 +41,26 @@ class Trie{
             return false;
         }
     }
+
+    delete(word) {
+     
+     let curruntNode = this.root;
+     if(this.search(word)){
+        [...word].forEach((char) => {
+            curruntNode = curruntNode.next[char.charCodeAt(0) - 97];
+        });
+        curruntNode.isEnd = false;
+     } else {
+         return 'not found';
+     }
+    }
+
 }
 
 const myTrie = new Trie();
 myTrie.add('aadil');
 myTrie.add('aacil');
+myTrie.add('aac');
+myTrie.delete('aacil');
+console.log(myTrie.search('aacil'));
+console.log(myTrie.search('aac'));
