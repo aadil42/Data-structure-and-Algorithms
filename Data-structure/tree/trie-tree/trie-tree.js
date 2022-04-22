@@ -9,22 +9,28 @@ class Node{
 }
 
 class Trie{
-
     constructor() {
         this.root = new Node();
     }
-
     add(word) {
         let curruntNode = this.root;
         [...word].forEach((char) => {
             if(!curruntNode.next[char.charCodeAt(0) - 97]) {
                 curruntNode.next[char.charCodeAt(0) - 97] = new Node(char);
             }
+            curruntNode.next[char.charCodeAt(0) - 97].count++;
             curruntNode = curruntNode.next[char.charCodeAt(0) - 97];
         });
         curruntNode.isEnd = true;
     }
+    NumberOfWordsStartsWith(prefix) {
+        let curruntNode = this.root;
+        [...prefix].forEach((char) => {
+            curruntNode = curruntNode.next[char.charCodeAt(0) - 97];
+        });
 
+        return curruntNode.count;
+    }
     search(word) {
         let curruntNode = this.root;
 
@@ -61,6 +67,6 @@ const myTrie = new Trie();
 myTrie.add('aadil');
 myTrie.add('aacil');
 myTrie.add('aac');
-myTrie.delete('aacil');
-console.log(myTrie.search('aacil'));
-console.log(myTrie.search('aac'));
+// myTrie.delete('aacil');
+// console.log(myTrie.search('aacil'));
+console.log(myTrie.NumberOfWordsStartsWith('aad'));
