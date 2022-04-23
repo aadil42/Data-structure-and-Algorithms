@@ -16,7 +16,7 @@ class PriorityQueue {
     push(data) {
         this.queue.push(data);
         let currunt_index = this.queue.length -1;
-        while(this.queue[currunt_index] < this.queue[this.getParent(currunt_index)]) {
+        while(this.queue[currunt_index] > this.queue[this.getParent(currunt_index)]) {
             const parentIn = this.getParent(currunt_index);
             this.swap(parentIn, currunt_index);
             currunt_index = parentIn;
@@ -28,17 +28,25 @@ class PriorityQueue {
         this.swap(0, this.queue.length -1);
         this.queue.pop();
         let currunt_index = 0;
-        while(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] || this.queue[currunt_index] > this.queue[this.getRightChild(currunt_index)]) {
-            if(this.queue[currunt_index] > this.queue[this.getLeftChild(currunt_index)] && this.queue[this.getLeftChild(currunt_index)] >= this.queue[this.getRightChild(currunt_index)]) {
-                // swap the right child with parent
-                this.swap(currunt_index, this.getRightChild(currunt_index));
-                currunt_index = this.getRightChild(currunt_index);
-            } else if(this.queue[currunt_index] > this.queue[this.getRightChild(currunt_index)] && this.queue[this.getRightChild(currunt_index)] >= this.queue[this.getLeftChild(currunt_index)]) {
-                // swap the left child with parent
-                this.swap(currunt_index, this.getLeftChild(currunt_index));
-                currunt_index = this.getLeftChild(currunt_index);
-            } 
-        }
+        while((currunt_index < this.size - 1) && 
+               this.queue[currunt_index] < this.queue[this.getLeftChild(currunt_index)] ||
+               this.queue[currunt_index] < this.queue[this.getRightChild(currunt_index)] 
+        )  {
+            let appropriateIndex;
+            if(this.queue[this.getLeftChild(currunt_index)] > this.queue[this.getRightChild(currunt_index)]) {
+                appropriateIndex = this.getLeftChild(currunt_index);
+            } else {
+                appropriateIndex = this.getRightChild(currunt_index);
+            }
+            console.log(appropriateIndex);
+           if(this.queue[currunt_index] < this.queue[appropriateIndex]) {
+               this.swap(currunt_index, appropriateIndex);
+               currunt_index = appropriateIndex;
+           } else {
+               break;
+           }
+        } 
+
     }
     getLeftChild(index) {
         return (index * 2) + 1;
@@ -63,15 +71,21 @@ class PriorityQueue {
 }
 
 
+
 const myPriority = new PriorityQueue();
-myPriority.push(1);
-myPriority.push(2);
-myPriority.push(3);
-myPriority.push(4);
-myPriority.push(2);
-myPriority.push(2);
+
+myPriority.push(84);
+myPriority.push(33);
+myPriority.push(29);
+myPriority.push(10);
+myPriority.push(13);
+myPriority.push(87);
+console.log(myPriority.queue);
 myPriority.pop();
 myPriority.pop();
 myPriority.pop();
 myPriority.pop();
-console.log(myPriority.peek());
+myPriority.pop();
+myPriority.pop();
+console.log(myPriority.queue);
+
