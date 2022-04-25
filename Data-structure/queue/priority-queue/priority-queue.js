@@ -13,8 +13,8 @@ class PriorityQueue {
         this.size = 0;
     }
 
+    // this is for the min heap
     push(data) {
-
     this.queue.push(data);
     let currunt_index = this.queue.length - 1;
     
@@ -24,17 +24,15 @@ class PriorityQueue {
     }
     this.size++;
     }
-
+    // this is for the min heap
     pop() {
         this.swap(0, this.queue.length - 1);
         const popData = this.queue.pop();
-
         let i = 0;
         while(i < this.queue.length - 1) {
             let root = i;
             let left = this.getLeftChild(i);
             let right = this.getRightChild(i);
-
             if(this.queue[root] > this.queue[left]) {
                 this.swap(root, this.getLeftChild(root));
                 i = left;
@@ -43,11 +41,9 @@ class PriorityQueue {
                 this.swap(root, this.getRightChild(root));
                 i = right;
             }
-
             if(this.queue[root] < this.queue[left] && this.queue[root] < this.queue[right]) {
                 break;
             }
-
             if(!this.queue[left] || !this.queue[right]) {
                 break;
             }
@@ -56,43 +52,47 @@ class PriorityQueue {
         return popData;
     }
 
-
+    // this is for the max heap
     // push(data) {
     //     this.queue.push(data);
-    //     let currunt_index = this.queue.length -1;
-    //     while(this.queue[currunt_index] > this.queue[this.getParent(currunt_index)]) {
-            
-    //         const parentIn = this.getParent(currunt_index);
-    //         this.swap(parentIn, currunt_index);
-    //         currunt_index = parentIn;
+    //     let currunt_index = this.queue.length - 1;
+    //     while(currunt_index !== 0 && this.queue[currunt_index] > this.queue[this.getParent(currunt_index)]) {
+    //         this.swap(currunt_index, this.getParent(currunt_index));
+    //         currunt_index = this.getParent(currunt_index);
     //     }
     //     this.size++;
     // }
 
+    // // this is for the max heap
     // pop() {
-    //     this.swap(0, this.queue.length -1);
-    //     this.queue.pop();
-    //     let currunt_index = 0;
-    //     while((currunt_index < this.size - 1) && 
-    //            this.queue[currunt_index] < this.queue[this.getLeftChild(currunt_index)] ||
-    //            this.queue[currunt_index] < this.queue[this.getRightChild(currunt_index)] 
-    //     )  {
-    //         let appropriateIndex;
-    //         if(this.queue[this.getLeftChild(currunt_index)] > this.queue[this.getRightChild(currunt_index)]) {
-    //             appropriateIndex = this.getLeftChild(currunt_index);
-    //         } else {
-    //             appropriateIndex = this.getRightChild(currunt_index);
+    //     this.swap(0, this.queue.length - 1);
+    //     const popData = this.queue.pop();
+    //     let i = 0;
+    //     while(i < this.queue.length - 1) {
+    //         let root = i;
+    //         let left = this.getLeftChild(i);
+    //         let right = this.getRightChild(i);
+    //         if(this.queue[root] < this.queue[left]) {
+    //             this.swap(root, this.getLeftChild(root));
+    //             i = left;
     //         }
-    //         console.log(appropriateIndex);
-    //        if(this.queue[currunt_index] < this.queue[appropriateIndex]) {
-    //            this.swap(currunt_index, appropriateIndex);
-    //            currunt_index = appropriateIndex;
-    //        } else {
-    //            break;
-    //        }
-    //     } 
 
+    //         // now the root will have the value of left child.
+    //         if(this.queue[root] < this.queue[right]) {
+    //             this.swap(root, this.getRightChild(root));
+    //             i = right;
+    //         }
+    //         if(this.queue[root] > this.queue[left] && this.queue[root] > this.queue[right]) {
+    //             break;
+    //         }
+    //         if(!this.queue[left] || !this.queue[right]) {
+    //             break;
+    //         }
+    //     }
+
+    //     return popData;
     // }
+
     getLeftChild(index) {
         return (index * 2) + 1;
     }
@@ -127,6 +127,6 @@ console.log(myPriority.queue);
 myPriority.pop();
 myPriority.pop();
 myPriority.pop();
-// myPriority.pop();
+myPriority.pop();
 console.log(myPriority.queue);
 
