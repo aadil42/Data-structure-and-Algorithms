@@ -119,10 +119,10 @@ class PriorityQueue {
 
 const myPriority = new PriorityQueue();
 
-myPriority.push(4);
-myPriority.push(5);
-myPriority.push(20);
-myPriority.push(7);
+myPriority.push(8.94);
+myPriority.push(10.19);
+myPriority.push(12.20);
+myPriority.push(8.06);
 console.log(myPriority.queue);
 myPriority.pop();
 myPriority.pop();
