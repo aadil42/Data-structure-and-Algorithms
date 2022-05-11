@@ -36,13 +36,21 @@ class Queue {
     }
 
     dequeue() {
+       
+        let toBeReturn;
         if(this.front && !this.front.next) {
+            toBeReturn = this.front;
             this.front = this.front.next;
             this.back = this.front;
         } else {
-            this.front = this.front.next;
+            toBeReturn = this.front;
+            if(this.front) {
+                this.front = this.front.next;
+            }
         }
         this.count--;
+
+        return toBeReturn ? toBeReturn : null; 
     }
     reverseQueue() {
         const stack = [];
@@ -82,7 +90,8 @@ class Queue {
     }
 
     peek() {
-        return this.front.val;
+        return this.front ? this.front.val : null;
+        // return this.front.val;
     }
 
     print() {
@@ -104,20 +113,19 @@ class Queue {
 // - peek() – return front elemenet in the queue(line).
 
 
-const myQueue = new Queue(5);
-myQueue.enqueue(1);
+const myQueue = new Queue(Number.MAX_SAFE_INTEGER);
+myQueue.enqueue([1,1]);
+myQueue.enqueue([2,2]);
+myQueue.enqueue([3,3]);
+myQueue.enqueue([4,4]);
+myQueue.enqueue([5,5]);
+myQueue.enqueue([6,6]);
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
 // myQueue.dequeue();
-myQueue.enqueue(2);
-myQueue.enqueue(3);
-myQueue.enqueue(4);
-myQueue.enqueue(5);
-// myQueue.dequeue()
-// myQueue.dequeue()
-myQueue.enqueue(6);
-myQueue.enqueue(6);
-myQueue.enqueue(6);
-myQueue.enqueue(6);
-myQueue.reverseQueue();
-// console.log(myQueue.count1());
 console.log(myQueue.peek());
+// console.log(myQueue.print());
 
