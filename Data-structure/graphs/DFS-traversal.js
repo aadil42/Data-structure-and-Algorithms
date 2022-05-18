@@ -1,3 +1,4 @@
+// you need to have valid graph to traverse it.
 function dfs(graph, source) {
 
     let dfsStack = [];
