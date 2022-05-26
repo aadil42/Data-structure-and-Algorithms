@@ -14,7 +14,7 @@ class Graph{
     }
 
     idExists(id) {
-        if(this.graphList.had(id)) {
+        if(this.graphList.has(id)) {
             return true;
         } else {
             return false;
@@ -36,12 +36,32 @@ class Graph{
             neighbors.delete(key);
         }
      }
+
+     connectNode(id, id1, w) {
+         const node1 = this.graphList.get(id);
+         const node2 = this.graphList.get(id1);
+         // connection an edge
+         if(!node1.list.has(id1)) {
+             node1.list.set(id1, w);
+         }
+         if(!node2.list.has(id)) {
+             node2.list.set(id, w);
+         }
+     }
 }
 
-// const myGraph = new Graph();
-// myGraph.addNode(1,'gujarat');
-// myGraph.addNode(2,'maharastra');
-// myGraph.addNode(3,'punjab');
+const myGraph = new Graph();
+myGraph.addNode(1,'gujarat');
+myGraph.addNode(2,'maharastra');
+myGraph.addNode(3,'punjab');
+myGraph.connectNode(1,2,100);
+myGraph.connectNode(1,3,100);
+myGraph.connectNode(2,1,100);
+myGraph.connectNode(2,3,100);
+myGraph.connectNode(3,1,100);
+myGraph.connectNode(3,2,100);
+
+console.log(myGraph.graphList.get(3));
 
 
 
