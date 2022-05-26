@@ -28,7 +28,20 @@ class Graph{
             this.graphList.set(id, new Node(name));
         }
     }
+
+    deleteNode(id) {
+        const neighbors = this.graphList.get(id).list;
+        for(const [key, value] of neighbors) {
+            this.graphList.get(key).list.delete(id);
+            neighbors.delete(key);
+        }
+     }
 }
+
+// const myGraph = new Graph();
+// myGraph.addNode(1,'gujarat');
+// myGraph.addNode(2,'maharastra');
+// myGraph.addNode(3,'punjab');
 
 
 
