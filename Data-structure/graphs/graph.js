@@ -77,7 +77,19 @@ class Graph{
 
        first.list.delete(id1);
        second.list.delete(id);
-    }        
+    }   
+    
+    getAllNeigbor(id) {
+        
+        const node = this.graphList.get(id);
+        const neigbor = [];
+        if(node) {
+            for(const [key, value] of node.list) {
+                neigbor.push(this.graphList.get(key).name);
+            }
+        }
+        return node ? neigbor: 'no neigbor';
+    }
 }
 
 const myGraph = new Graph();
@@ -91,7 +103,7 @@ myGraph.connectNode(2,3,100);
 myGraph.connectNode(3,1,100);
 myGraph.connectNode(3,2,100);
 
-console.log(myGraph.updateNode(3, 'boston'));
+console.log(myGraph.getAllNeigbor(3));
 console.log(myGraph.showGraph());
 
 
