@@ -30,6 +30,14 @@ class Graph{
             this.graphList.set(id, new Node(name));
         }
     }
+    updateNode(id, name) {
+        if(this.graphList.has(id)) { 
+            const node = this.graphList.get(id);
+            node.name = name;
+        } else {
+            return false;
+        }
+    }
     deleteNode(id) {
         const neighbors = this.graphList.get(id).list;
         for(const [key, value] of neighbors) {
@@ -83,7 +91,7 @@ myGraph.connectNode(2,3,100);
 myGraph.connectNode(3,1,100);
 myGraph.connectNode(3,2,100);
 
-console.log(myGraph.updateConnection(3, 2, 500));
+console.log(myGraph.updateNode(3, 'boston'));
 console.log(myGraph.showGraph());
 
 
