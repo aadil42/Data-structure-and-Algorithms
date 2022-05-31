@@ -114,6 +114,33 @@ class Graph{
 
         return dfsArr;
     }
+
+    bfs() {
+        const bfsStack = [];
+        const explored = new Set();
+        const [initialStart] = this.graphList.keys();
+        bfsStack.push(initialStart);
+        explored.add(initialStart);
+
+        
+        const bfsArr = [];
+        bfsArr.push(this.graphList.get(initialStart).name);
+        while(bfsStack.length) {
+            const node = bfsStack.pop();
+
+            const nodeList = [...this.graphList.get(node).list.keys()];
+
+            nodeList.filter((element) => {
+               return !explored.has(element);
+            }).forEach((element) => {
+                bfsArr.push(this.graphList.get(element).name);
+                bfsStack.push(element);
+                explored.add(element);
+            });
+        }
+
+        return bfsArr;   
+    }
 }
 
 const myGraph = new Graph();
@@ -133,7 +160,7 @@ myGraph.connectNode(4,6,100);
 myGraph.connectNode(4,7,100);
 myGraph.connectNode(7,8,100);
 
-console.log(myGraph.dfs());
+console.log(myGraph.bfs());
 // console.log(myGraph.showGraph());
 
 
