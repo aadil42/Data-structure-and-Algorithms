@@ -80,7 +80,6 @@ class Graph{
     }   
     
     getAllNeigbor(id) {
-        
         const node = this.graphList.get(id);
         const neigbor = [];
         if(node) {
@@ -90,21 +89,52 @@ class Graph{
         }
         return node ? neigbor: 'no neigbor';
     }
+
+    dfs() {
+        const dfsStack = [];
+        const explored = new Set();
+        const [initialStart] = this.graphList.keys();
+        dfsStack.push(initialStart);
+        explored.add(initialStart);
+
+        const dfsArr = [];
+        while(dfsStack.length) {
+            const node = dfsStack.pop();
+            dfsArr.push(this.graphList.get(node).name);
+
+            const nodeList = [...this.graphList.get(node).list.keys()];
+
+            nodeList.filter((element) => {
+               return !explored.has(element);
+            }).forEach((element) => {
+                dfsStack.push(element);
+                explored.add(element);
+            });
+        }
+
+        return dfsArr;
+    }
 }
 
 const myGraph = new Graph();
 myGraph.addNode(1,'gujarat');
 myGraph.addNode(2,'maharastra');
 myGraph.addNode(3,'punjab');
+myGraph.addNode(4,'kerela');
+myGraph.addNode(5,'sikkim');
+myGraph.addNode(6,'hydrabad');
+myGraph.addNode(7,'dilli');
+myGraph.addNode(8,'karnataka');
 myGraph.connectNode(1,2,100);
-myGraph.connectNode(1,3,100);
-myGraph.connectNode(2,1,100);
 myGraph.connectNode(2,3,100);
-myGraph.connectNode(3,1,100);
-myGraph.connectNode(3,2,100);
+myGraph.connectNode(3,4,100);
+myGraph.connectNode(4,5,100);
+myGraph.connectNode(4,6,100);
+myGraph.connectNode(4,7,100);
+myGraph.connectNode(7,8,100);
 
-console.log(myGraph.getAllNeigbor(3));
-console.log(myGraph.showGraph());
+console.log(myGraph.dfs());
+// console.log(myGraph.showGraph());
 
 
 
