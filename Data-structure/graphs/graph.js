@@ -138,7 +138,6 @@ class Graph{
                 explored.add(element);
             });
         }
-
         return bfsArr;   
     }
 }
