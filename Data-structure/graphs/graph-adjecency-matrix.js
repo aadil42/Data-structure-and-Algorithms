@@ -46,6 +46,24 @@ class Graph {
         goRecursive(start);
         return dfsArr;
     }
+
+    bfs(start) {
+        const visited = new Set();
+        const bfsArr = [];
+        bfsArr.push(start);
+        visited.add(start);
+
+        for(let i = 0; i < this.graphMatrix.length; i++) {
+            for(let j = 0; j < this.graphMatrix[0].length; j++) {
+                if(!visited.has(j) && this.graphMatrix[i][j]) {
+                    visited.add(j);
+                    bfsArr.push(j);
+                }
+            }
+        }
+
+        return bfsArr;
+    }
     showMatrix() {
         return this.graphMatrix;
     }
@@ -61,5 +79,5 @@ myGraph.addNode(0,1);
 myGraph.addNode(1,3);
 myGraph.addNode(2,3);
 console.log(myGraph.showMatrix());
-console.log(myGraph.dfs(0));
+console.log(myGraph.bfs(0));
 // console.log(myGraph.graphMatrix[0][0]);
