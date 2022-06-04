@@ -20,6 +20,31 @@ class Graph {
 
         // add the edge
         this.graphMatrix[id1][id2] = 1;
+        this.graphMatrix[id2][id1] = 1;
+    }
+
+    deleteNode(id, id1) {
+        this.graphMatrix[id][id1] = 0;
+        this.graphMatrix[id1][id] = 0;
+        return 'deleted';
+    }
+
+    dfs(start) {
+        const visited = new Set();
+        const dfsArr = [];
+
+        let goRecursive =  function(start) {
+            dfsArr.push(start);
+            visited.add(start);
+            for (let i = 0; i < this.graphMatrix.length; i++) {
+                if(!visited.has(i) && this.graphMatrix[start][i]) {
+                    goRecursive(i);
+                }
+            }
+        }
+        goRecursive = goRecursive.bind(this);
+        goRecursive(start);
+        return dfsArr;
     }
     showMatrix() {
         return this.graphMatrix;
@@ -27,15 +52,14 @@ class Graph {
 }
 
 // addNode
-// updateNode
 // deleteNode
 
 
 const myGraph = new Graph(5);
-myGraph.addNode(1,2);
 myGraph.addNode(0,2);
 myGraph.addNode(0,1);
 myGraph.addNode(1,3);
 myGraph.addNode(2,3);
 console.log(myGraph.showMatrix());
+console.log(myGraph.dfs(0));
 // console.log(myGraph.graphMatrix[0][0]);
