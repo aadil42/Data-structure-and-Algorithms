@@ -558,6 +558,7 @@ class BST {
             }
 
             const totalElementUntillRoot = curruntIndex -  isi;
+            // just keep track of these parameters and you'll know it.
             node.left = goRecursive(inO, isi, curruntIndex - 1, preO, psi + 1, totalElementUntillRoot + psi);
             node.right = goRecursive(inO, curruntIndex + 1, iei, preO, psi + 1 + totalElementUntillRoot, pei);
             return node;
