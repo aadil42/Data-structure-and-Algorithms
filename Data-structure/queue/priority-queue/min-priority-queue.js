@@ -14,48 +14,45 @@ class PriorityQueue {
         this.size = 0;
     }
 
-   
-    // this is for the  max heap
+    // this is for the min heap
+    add(val) {
+        this.queue.push(val);
+        this.bubbleUP(this.queue.length - 1);
+    }
+
     poll() {
         this.swap(0, this.queue.length - 1);
         const popped = this.queue.pop();
         console.log(popped);
-        this.maxBubbleDownBalance(0);
+        this.bubbleDown(0);
+        return popped;
     }
 
-    // this will bubble down to the max heap
-    maxBubbleDownBalance(index) {
-        if(this.queue[index] > this.queue[this.getLeftChild(index)] &&
-            this.queue[index] > this.queue[this.getRightChild(index)]) return;
-            
-         if(this.queue[index] < this.queue[this.getLeftChild(index)]) {
-            this.swap(index, this.getLeftChild(index));
-            this.maxBubbleDownBalance(this.getLeftChild(index));
-         }   
-
-         if(this.queue[index] < this.queue[this.getRightChild(index)]) {
-            this.swap(index, this.getRightChild(index));
-            this.maxBubbleDownBalance(this.getRightChild(index));
-         }
-    }
-
-    // this will bubble up to the max tree.
-    maxBuubbleUpBalance(index) {
+    //this is for the min heap
+    bubbleUP(index) {
 
         if(index <= 0) return;
-        if(this.queue[index] < this.queue[this.getParent(index)]) return;
+        if(this.queue[index] > this.queue[this.getParent(index)]) return;
 
-        if(this.queue[index] > this.queue[this.getParent(index)]) {
+        if(this.queue[index] < this.queue[this.getParent(index)]) {
             this.swap(index, this.getParent(index));
-            this.maxBuubbleUpBalance(this.getParent(index));
+            this.bubbleUP(this.getParent(index));
         }
     }
 
-    
-    // this is for max heap 
-    add(val) {
-        this.queue.push(val);
-        this.maxBuubbleUpBalance(this.queue.length - 1);
+    bubbleDown(index) {
+        if(this.queue[index] < this.queue[this.getLeftChild(index)] &&
+            this.queue[index] < this.queue[this.getRightChild(index)]) return;
+            
+         if(this.queue[index] > this.queue[this.getLeftChild(index)]) {
+            this.swap(index, this.getLeftChild(index));
+            this.bubbleDown(this.getLeftChild(index));
+         }   
+
+         if(this.queue[index] > this.queue[this.getRightChild(index)]) {
+            this.swap(index, this.getRightChild(index));
+            this.bubbleDown(this.getRightChild(index));
+         }
     }
 
     getLeftChild(index) {
