@@ -1,105 +1,108 @@
-// - Enqueue() – Add item to the queue from the REAR.
-// - Dequeue() – Remove item from the queue from the FRONT.
-// - isFull() – Check if queue is full or not.
-// - isEmpty() – Check if queue empty or not.
-// - count() – Get number of items in the queue.
-// - peek() – return front elemenet in the queue(line).
-// 1->2->3->4
+/**
+ * Time O(1) | Space O(1)
+ * @param {number} k
+ */
+var MyCircularQueue = function(k) {
+    
+    this.left = new ListNode();
+    this.right = new ListNode();
 
-class Node {
-    constructor(val, next = null) {
-        this.val = val;
-        this.next = next;
-    }
+    this.left.next = this.right;
+    this.right.pre = this.left;
+    this.current = null;
+    this.limit = k;
+    this.size = 0;
+};
+
+var ListNode = function(val, next = null, pre = null) {
+  this.val = val;
+  this.next = next;
+  this.pre = pre;
 }
 
-class Circular_queue_linked_list {
-    constructor(size) {
-        this.size = size;
-        this.counter = 0;
-        this.queue = this.front;
+/** 
+ * Time O(1) | Space O(1)
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.enQueue = function(value) {
 
-        // null->null->null->null
-        this.front = new Node(null);
-        let temp = this.front;
-        let i = 1;
-        while(i < this.size) {
-            const temp1 = new Node(null);
-            this.front.next = temp1;
-            this.front = this.front.next;
-            i++;
-        }
-        this.front.next = temp;
-        this.front = temp;
-        this.rear = temp;
-    }
-    //1->2->3->4
-    enqueue(data) {
-        
-        if(this.isFull()) {
-            return;
-        }else {
-            this.rear.val = data;
-            this.rear = this.rear.next;
-            this.counter++;
-        }
-    }
-    dequeu() {
-        if(this.front.val) {
-            this.front.val = null;
-            this.front = this.front.next;   
-            this.counter--; 
-        }
-    }
-    empty() {
-        if(this.front.val == null && this.rear.val == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    isFull() {
-        if(this.rear.val == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    peek() {
-        if(this.front.val) {
-            return this.front.val;
-        } else {
-            return 'queue is empty.'
-        }
-    }
-    count() {
-        return this.counter;
-    }
-    print() {
-        let output = '';
-        let currunt = this.front;
-        while(currunt.next !== this.front) {
-            output +=  currunt.val + '->';
-            currunt = currunt.next;
-        }
-        output += currunt.val + '->null';
-        return output;
-    }
-}
-const myCircularQueue = new Circular_queue_linked_list(4);
-myCircularQueue.enqueue(1);
-myCircularQueue.enqueue(2);
-myCircularQueue.enqueue(3);
-// myCircularQueue.dequeu();
-// myCircularQueue.dequeu();
-// myCircularQueue.dequeu();
-// myCircularQueue.dequeu();
-// myCircularQueue.dequeu();
-// myCircularQueue.enqueue(4);
-// myCircularQueue.dequeu();
-// myCircularQueue.enqueue(5);
-// myCircularQueue.dequeu();
-// myCircularQueue.enqueue(10);
-myCircularQueue.dequeu();
-myCircularQueue.enqueue(2);
-console.log(myCircularQueue.count());
+ if(!this.isFull()) {
+
+     if(this.size === 0) {
+         this.current = new ListNode(value,this.right, this.left);
+         this.left.next = this.current;
+         this.right.pre = this.current;
+     } else {
+         const temp = new ListNode(value, this.right, this.current);
+         this.current.next = temp;
+         this.right.pre = temp;
+         this.current = this.current.next;
+     }
+     
+     this.size++;
+     return true;
+ }
+
+ return false;
+};
+
+/**
+ * Time O(1) | Space O(1)
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.deQueue = function() {
+   if(!this.isEmpty()) {
+
+       this.left.next = this.left.next.next;
+       this.left.next.pre = this.left;
+       this.size--;
+       return true;
+   }
+
+   return false;
+};
+
+/**
+ * Time O(1) | Space O(1)
+ * @return {number}
+ */
+MyCircularQueue.prototype.Front = function() {
+    return this.left.next.val !== undefined ? this.left.next.val : -1;
+};
+
+/**
+ * Time O(1) | Space O(1)
+ * @return {number}
+ */
+MyCircularQueue.prototype.Rear = function() {
+    // console.log(this.right.pre);
+    return this.right.pre.val !== undefined ? this.right.pre.val : -1;
+};
+
+/**
+ * Time O(1) | Space O(1)
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isEmpty = function() {
+    return this.size ==  0 ? true : false;
+};
+
+/**
+ * Time O(1) | Space O(1)
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isFull = function() {
+     return this.size >= this.limit ? true : false;
+};
+
+/** 
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * var obj = new MyCircularQueue(k)
+ * var param_1 = obj.enQueue(value)
+ * var param_2 = obj.deQueue()
+ * var param_3 = obj.Front()
+ * var param_4 = obj.Rear()
+ * var param_5 = obj.isEmpty()
+ * var param_6 = obj.isFull()
+ */
