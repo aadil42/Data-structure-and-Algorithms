@@ -4,7 +4,7 @@
 /**
  * 
  * Binary Search
- * 
+ * https://leetcode.com/problems/search-insert-position/
  * Time O(log(n)) | Space O(1)
  * @param {number[]} nums
  * @param {number} target
