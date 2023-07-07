@@ -1,5 +1,5 @@
 
-// you need to print the steps you'll perform.
+// you need to print the steps you'll perform
 
 // Time O(2^n) | Space O(n)
 const towerOfHanoi = (n, source, helper, destination) => {
