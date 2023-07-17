@@ -1,7 +1,30 @@
+// helper function 
+
+const makeGraph = (adjList) => {
+
+    const graph = {};
+    for(let i = 0; i < adjList.length; i++) {
+        const node1 = adjList[i][0];
+        const node2 = adjList[i][1];
+        if(graph[node1]) {
+            graph[node1] = [...graph[node1], node2];
+        } else {
+            graph[node1] = [node2];
+        }
+        if(graph[node2]) {
+            graph[node2] = [...graph[node2], node1];
+        } else {
+            graph[node2] = [node1];
+        }
+    }   
+
+    return graph;
+}
 // n = number of nodes in the graph.
 // Time O(n) | Space O(n)
-const cycleDetectDFS = (graph, src) => {
+const cycleDetectDFS = (adjList, src) => {
 
+    const graph = makeGraph(adjList);
     const visited = new Set();
     const dfs = (node, parent) => {
         visited.add(node);
@@ -118,8 +141,9 @@ class Queue {
 }
 
 
-const cycleDetectBFS = (graph, src) => {
+const cycleDetectBFS = (adjList, src) => {
 
+    const graph = makeGraph(adjList);
     const visited = new  Set();
     const queue = new Queue(Number.MAX_SAFE_INTEGER);
     queue.enqueue([src, -1]);
@@ -140,16 +164,58 @@ const cycleDetectBFS = (graph, src) => {
     return 'no cycle found.';
 }
 
-const graph = {
-    '1': [3,5],
-    '3': [1,4,6],
-    '5': [1,4,7],
-    '4': [5,3],
-    '6': [3],
-    '7': [8,5],
-    '8': [7]
+cycleDetectUnioinFind = (adjList) => {
+
+    const rank = new Array(adjList.length + 1).fill(1);
+    const parent = [];
+
+    for(let i = 1; i < adjList.length + 1; i++) {
+        parent[i] = i;
+    }
+
+    const find = (n1) => {
+        while(parent[n1] !== n1) {
+            n1 = parent[n1];
+        }
+        return n1;
+    }
+
+    const union = (n1, n2) => {
+        n1 = find(n1);
+        n2 = find(n2);
+
+        if(n1 === n2) return false;
+        if(rank[n1] > rank[n2]) {
+            rank[n1] += rank[n2];
+            parent[n2] = n1;
+        } else {
+            rank[n2] += rank[n1];
+            parent[n1] = n2;
+        }
+        return true;
+    }
+    for(let i = 0; i < adjList.length; i++) {
+        const [n1, n2] = adjList[i];
+        if(!union(n1, n2)) return [n1,n2];
+    }
+
+    return 'no cycle found.'
+    
 }
 
-/// ALL VALUES OF THE NODES IN THE GRAPH MUST BE UNIQUE.
-// console.log(cycleDetectDFS(graph, 1));
-console.log(cycleDetectBFS(graph, 1));
+/// ALL VALUES OF THE NODES IN THE GRAPH MUST BE UNIQUE. AND THEY SHOULD BE BETWEEN 1 AND N
+const adjList = [[1,2],[1,4],[2,3],[2,5],[3,4],[4,6],[6,7]];
+console.log(cycleDetectUnioinFind(adjList));
+// console.log(cycleDetectDFS(adjList, 1));
+// console.log(cycleDetectBFS(adjList, 1));
+
+// const graph = {
+//     '1': [3,5],
+//     '3': [1,4,6],
+//     '5': [1,4,7],
+//     '4': [5,3],
+//     '6': [3],
+//     '7': [8,5],
+//     '8': [7]
+// }
+
