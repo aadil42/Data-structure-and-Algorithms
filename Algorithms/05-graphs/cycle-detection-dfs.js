@@ -174,6 +174,9 @@ cycleDetectUnioinFind = (adjList) => {
     }
 
     const find = (n1) => {
+        // we have to traverse because we're not doing paht compression. 
+        // watch the below video to know about path compression. It's just a fancy name. It's nothing hard. Belive me.
+        // https://www.youtube.com/watch?v=ID00PMy0-vE&t=729s&pp=ygUKdW5pb24gZmluZA%3D%3D
         while(parent[n1] !== n1) {
             n1 = parent[n1];
         }
@@ -205,17 +208,6 @@ cycleDetectUnioinFind = (adjList) => {
 
 /// ALL VALUES OF THE NODES IN THE GRAPH MUST BE UNIQUE. AND THEY SHOULD BE BETWEEN 1 AND N
 const adjList = [[1,2],[1,4],[2,3],[2,5],[3,4],[4,6],[6,7]];
-console.log(cycleDetectUnioinFind(adjList));
+// console.log(cycleDetectUnioinFind(adjList));
 // console.log(cycleDetectDFS(adjList, 1));
 // console.log(cycleDetectBFS(adjList, 1));
-
-// const graph = {
-//     '1': [3,5],
-//     '3': [1,4,6],
-//     '5': [1,4,7],
-//     '4': [5,3],
-//     '6': [3],
-//     '7': [8,5],
-//     '8': [7]
-// }
-
