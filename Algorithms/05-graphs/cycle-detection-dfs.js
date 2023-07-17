@@ -1,25 +1,22 @@
-
-const cycleDetect = (graph, src) => {
+// n = number of nodes in the graph.
+// Time O(n) | Space O(n)
+const cycleDetectDFS = (graph, src) => {
 
     const visited = new Set();
-    let cycle = [];
     const dfs = (node, parent) => {
         visited.add(node);
         const neighbor = graph[node];
         for(let i = 0; i < neighbor.length; i++) {
-            if(visited.has(neighbor[i]) && neighbor !== parent) {
-                cycle[0] = node;
-                cycle[1] = neighbor[i];
-                return [node, neighbor];
+            if(visited.has(neighbor[i]) && neighbor[i] !== parent) {
+                return [node, neighbor[i]];
             };
-            dfs(neighbor[i], node);
+            if(!visited.has(neighbor[i])) dfs(neighbor[i], node);
         }
-
         return 'no cycle found';
     }
     return dfs(src, -1);
-    // return cycle;
 }
+
 
 const graph = {
     '1': [3,5],
@@ -31,4 +28,4 @@ const graph = {
     '8': [7]
 }
 
-console.log(cycleDetect(graph, 1));
+console.log(cycleDetectDFS(graph, 1));
